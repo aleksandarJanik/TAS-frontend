@@ -1,0 +1,28 @@
+
+<div class="vertical-align-center" style="height: 40rem;" id="login-form">
+
+  <form class="form-logIn" (ngSubmit)="loginSubmit()" style="margin: 0 auto;">
+    <h4 class="text-center">Log in</h4>
+    <div class="form-group">
+      <label for="exampleInputUsername">Username:</label>
+      <input type="text" class="form-control" id="usernameField" aria-describedby="usernameHelp" [(ngModel)]="username"
+        name="userName" placeholder="Enter username" required>
+
+    </div>
+    <div class="form-group mb-0">
+      <label for="exampleInputPassword1">Password:</label>
+      <input type="password" class="form-control" [(ngModel)]="password" id="passwordField" placeholder="Password"
+        name="userPassword">
+    </div>
+    <br>
+    <br>
+    <div style="text-align: center;">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    <hr>
+    <div class="text-center">
+      <a href="/register" style="text-decoration: none !important;">Register</a>
+    </div>
+  </form>
+</div>

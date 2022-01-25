@@ -1,0 +1,142 @@
+
+
+<div class="vertical-align-center" style="" id="login-form">
+  <h4 style="text-align: center;">Register</h4>
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-logIn" style="margin: 0 auto;">
+    <div class="form-group">
+      <label for="name" class="required">Username: </label>
+      <input type="text" formControlName="username" class="form-control">
+    </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['username'].touched || registerForm.controls['username'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['username'].errors?.['required']">
+          Username is required.
+        </span>
+        <span class="error ion-padding" *ngIf="registerForm.controls['username'].errors?.['minlength']">
+          Username should be min 6 chars long.
+        </span>
+        <span class="error ion-padding" *ngIf="registerForm.controls['username'].errors?.['maxlength']">
+          Username should be max 14 chars long.
+        </span>
+        <div class="error " *ngIf="registerForm.controls['username'].errors?.['lowercase']">
+          Username must contains at least 1 lowercase letter!
+        </div>
+        <div class="error " *ngIf="registerForm.controls['username'].errors?.['upercase']">
+          Username must contains at least 1 upercase letter!
+        </div>
+        <div class="error " *ngIf="registerForm.controls['username'].errors?.['pattern']">
+          It is not allowed to enter special characters for the username!
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">First Name: </label>
+        <input type="text" formControlName="firstName" class="form-control">
+      </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['firstName'].touched || registerForm.controls['firstName'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['firstName'].errors?.['required']">
+          First name is required.
+        </span>
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">Last Name: </label>
+        <input type="text" formControlName="lastName" class="form-control">
+      </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['lastName'].touched || registerForm.controls['lastName'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['lastName'].errors?.['required']">
+          Last name is required.
+        </span>
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">School: </label>
+        <input type="text" formControlName="school" class="form-control">
+      </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['school'].touched || registerForm.controls['school'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['school'].errors?.['required']">
+          Last name is required.
+        </span>
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">Subject: </label>
+        <input type="text" formControlName="subject" class="form-control">
+      </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['subject'].touched || registerForm.controls['subject'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['subject'].errors?.['required']">
+          Last name is required.
+        </span>
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">Email: </label>
+        <input type="text" formControlName="email" class="form-control">
+      </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['email'].touched || registerForm.controls['email'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['email'].errors?.['required']">
+          Email is required.
+        </span>
+        <span class="error ion-padding" *ngIf="registerForm.controls['email'].errors?.['email']">
+          Must be an email.
+        </span>
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">Password: </label>
+        <input type="text" formControlName="password" class="form-control">
+      </div>
+      <div *ngIf="registerForm.dirty && registerForm.controls['password'].touched || registerForm.controls['password'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['password'].errors?.['required']">
+          Password is required.
+        </span>
+          <div class="error " *ngIf="registerForm.controls['password'].errors?.['minlength']">
+            Password must be at least 8 characters in length
+          </div>
+          <div class="error " *ngIf="registerForm.controls['password'].errors?.['lowercase']">
+            Password must contains at least 1 lowercase letter!
+          </div>
+          <div class="error " *ngIf="registerForm.controls['password'].errors?.['upercase']">
+            Password must contains at least 1 upercase letter!
+          </div>
+          <div class="error " *ngIf="registerForm.controls['password'].errors?.['containsnum']">
+            Password must contains at least 1 number!
+          </div>
+          <div class="error " *ngIf="registerForm.controls['password'].errors?.['containschar']">
+            Password must contains at least 1 special character!
+          </div>
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="required">Confirm New Password: </label>
+        <input type="text" formControlName="confirmNewPassword" class="form-control">
+      </div>
+      <div
+        *ngIf="registerForm.dirty && registerForm.controls['confirmNewPassword'].touched || registerForm.controls['confirmNewPassword'].dirty">
+        <span class="error ion-padding" *ngIf="registerForm.controls['confirmNewPassword'].errors?.['required']">
+          Confirm password is required.
+        </span>
+
+
+        <span class="error ion-padding" *ngIf="registerForm.controls['confirmNewPassword'].errors?.['matching']">
+          Passwords don't match
+        </span>
+
+      </div>
+
+      <div style="text-align: center;"><button class="btn btn-success" >Register</button></div>
+  </form>
+
+  <div class="form-logIn" style="margin: 0 auto; padding-top: 0px;">
+
+    <hr>
+    <div class="text-center">
+      <a href="/login" style="text-decoration: none !important;" id="goBackBtn">Return to log in</a>
+    </div>
+  </div>
+</div>

@@ -18,8 +18,15 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@auth0/angular-jwt": "^5.0.2",
+    "@ngxs/devtools-plugin": "^3.7.3",
+    "@ngxs/logger-plugin": "^3.7.3-dev.master-5175b98",
+    "@ngxs/store": "^3.7.3",
+    "angular2-jwt": "^0.2.3",
     "rxjs": "~7.4.0",
+    "sweetalert2": "^11.3.6",
     "tslib": "^2.3.0",
+    "url-polyfill": "^1.1.12",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
