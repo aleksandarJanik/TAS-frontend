@@ -1,0 +1,68 @@
+<br>
+<div style=" width: 100% !important;">
+<div class="card col-12 col-lg-6 p-0" id="cardAddRatiosList" style="margin: 0 auto;">
+  <div class="card-header list-group-item-success p-0" id="rowForCollapsingAddStudent" (click)="collapsingAddStudent()"
+    style="cursor: pointer;" data-toggle="collapse" href="#addStudentFormCardBody">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6" style="justify-content: left !important;align-items: center; display: flex;">
+          <h5 class="m-0">Add Student</h5>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-tool" id="btnForCollapsingAddStudent"
+            style=" padding:0px !important; float:right; font-size: 30px;" type="button"><i
+              class="bi bi-dash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body collapse" id="addStudentFormCardBody">
+
+    <form [formGroup]="studentForm" (ngSubmit)="createStudent()"  id="addClassForm">
+
+      <div class="form-group mb-0">
+        <label for="name" class="required">First name:</label>
+        <input type="text" class="form-control" formControlName="firstName"  placeholder="Enter the student first name">
+      </div>
+      <div
+        *ngIf="studentForm.dirty && studentForm.controls['firstName'].touched || studentForm.controls['firstName'].dirty">
+        <span class="error ion-padding" *ngIf="studentForm.controls['firstName'].errors?.['required']">
+          First name is required.
+        </span>
+
+      </div>
+      <div class="form-group mb-0">
+        <label for="name" class="required">Last name:</label>
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Enter the student last name">
+      </div>
+      <div *ngIf="studentForm.dirty && studentForm.controls['lastName'].touched || studentForm.controls['lastName'].dirty">
+        <span class="error ion-padding" *ngIf="studentForm.controls['lastName'].errors?.['required']">
+          Last name is required.
+        </span>
+
+      </div>
+      <div class="form-group mb-0">
+        <label for="name" class="required">Student email:</label>
+        <input type="text" class="form-control" formControlName="email" name="studentEmail" placeholder="Enter the student email" required>
+      </div>
+      <div *ngIf="studentForm.dirty && studentForm.controls['email'].touched || studentForm.controls['email'].dirty">
+        <span class="error ion-padding" *ngIf="studentForm.controls['email'].errors?.['required']">
+          Email is required.
+        </span>
+        <span class="error ion-padding" *ngIf="studentForm.controls['email'].errors?.['email']">
+          Must be an email.
+        </span>
+
+      </div>
+      <br>
+      <div class="text-center">
+        <button class="btn btn-success" type="submit" id="createStudent">Create</button>
+      </div>
+
+
+    </form>
+  </div>
+
+</div>
+</div>

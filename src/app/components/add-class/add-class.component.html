@@ -1,0 +1,37 @@
+<div class="card col-12 col-lg-6 p-0" id="cardAddRatiosList" style="margin: 0 auto;">
+  <div class="card-header list-group-item-success p-0" id="rowForCollapsingAddClass" data-toggle="collapse"
+    (click)="collapsingAddClass()" style="cursor: pointer;" href="#addClassFormCardBody">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6" style="justify-content: left !important;align-items: center; display: flex;">
+          <h5 class="m-0">Add Class</h5>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-tool" id="btnForCollapsingAddClass"
+            style=" padding:0px !important; float:right; font-size: 30px;" type="button"><i
+              class="bi bi-dash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body  collapse" id="addClassFormCardBody">
+    <form [formGroup]="classForm" (ngSubmit)="createClass()">
+      <div class="form-group mb-0">
+        <label for="name" class="required">Class name</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Enter the name of class" required>
+      </div>
+      <div *ngIf="classForm.dirty && classForm.controls['name'].touched || classForm.controls['name'].dirty">
+        <span class="error ion-padding" *ngIf="classForm.controls['name'].errors?.['required']">
+          Class name is required.
+        </span>
+
+      </div>
+
+      <br>
+      <div class="text-center">
+        <button class="btn btn-success" type="submit" id="createClass">Create</button>
+      </div>
+    </form>
+  </div>
+
+</div>

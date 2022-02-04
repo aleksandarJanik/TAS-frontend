@@ -1,8 +1,9 @@
 
 
 <div class="vertical-align-center" style="" id="login-form">
-  <h4 style="text-align: center;">Register</h4>
+
   <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-logIn" style="margin: 0 auto;">
+    <h2 style="text-align: center;">Register</h2>
     <div class="form-group">
       <label for="name" class="required">Username: </label>
       <input type="text" formControlName="username" class="form-control">
@@ -88,7 +89,22 @@
 
       <div class="form-group">
         <label for="name" class="required">Password: </label>
-        <input type="text" formControlName="password" class="form-control">
+        <div class="input-group mb-3">
+          <input type="text" formControlName="password" [type]="showPassword ? 'text' : 'password'"
+            class="form-control pwd-control" id="password-field">
+          <div class="input-group-append">
+              <div style="font-size: 24px;" class="center-XY">
+                <i alt="show" class="far fa-eye bi bi-eye-slash-fill eye-show" (click)="showPassword = !showPassword"
+                  [class.hide]="showPassword"></i>
+                <i alt="hide" class="far fa-eye-slash bi bi-eye-fill eye-hide" (click)="showPassword = !showPassword"
+                  [class.hide]="!showPassword"></i>
+              </div>
+          </div>
+
+        </div>
+
+
+
       </div>
       <div *ngIf="registerForm.dirty && registerForm.controls['password'].touched || registerForm.controls['password'].dirty">
         <span class="error ion-padding" *ngIf="registerForm.controls['password'].errors?.['required']">
@@ -114,7 +130,19 @@
 
       <div class="form-group">
         <label for="name" class="required">Confirm New Password: </label>
-        <input type="text" formControlName="confirmNewPassword" class="form-control">
+          <div class="input-group mb-3">
+            <input type="text" formControlName="confirmNewPassword" class="form-control pwd-control"
+              [type]="showPassword ? 'text' : 'password'" id="password-field">
+            <div class="input-group-append">
+              <div style="font-size: 24px;" class="center-XY">
+                <i alt="show" class="far fa-eye bi bi-eye-slash-fill eye-show" (click)="showPassword = !showPassword"
+                  [class.hide]="showPassword"></i>
+                <i alt="hide" class="far fa-eye-slash bi bi-eye-fill eye-hide" (click)="showPassword = !showPassword"
+                  [class.hide]="!showPassword"></i>
+              </div>
+            </div>
+
+          </div>
       </div>
       <div
         *ngIf="registerForm.dirty && registerForm.controls['confirmNewPassword'].touched || registerForm.controls['confirmNewPassword'].dirty">

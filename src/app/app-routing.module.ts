@@ -29,6 +29,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'class/:id',
+    loadChildren: () =>
+      import('./components/class-details-page/class-details.module').then(
+        (m) => m.ClassDetailsModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',

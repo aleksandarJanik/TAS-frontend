@@ -1,0 +1,49 @@
+#logaOut {
+  position: fixed;
+  right: 50px;
+  bottom: 80px;
+}
+li::before {
+  /* add the new bullet point */
+  display: inline-block;
+  content: "";
+  -webkit-border-radius: 0.375rem;
+  border-radius: 0.375rem;
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-right: 0.5rem;
+  background-color: #cff4fc;
+}
+.center-XY {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.border_right {
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+.alternating-staining:nth-child(odd) {
+  background: #f2f2f2 !important;
+}
+.alternating-staining:nth-child(even) {
+  background: white !important;
+}
+#logaOut {
+  position: fixed;
+  right: 50px;
+  bottom: 80px;
+}
+#backToClassesBtn:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+#backToClassesBtn {
+  opacity: 0.8;
+}
+.threeDots {
+  display: inline-block;
+  width: 350px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}

@@ -7,12 +7,6 @@ import { SignUpRoutingModule } from './sign-up-routing.module';
 
 @NgModule({
   declarations: [SignUpPageComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    SignUpRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, SharedModule, SignUpRoutingModule, FormsModule],
 })
 export class SignUpModule {}

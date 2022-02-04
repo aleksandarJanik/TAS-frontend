@@ -1,0 +1,82 @@
+
+  <form [formGroup]="studentForm" #editFormEl (ngSubmit)="editStudent()" id="addClassForm">
+<div class="modal-body">
+
+
+    <div class="form-group mb-0">
+      <label for="name" class="required">First name:</label>
+      <input type="text" class="form-control" formControlName="firstName" placeholder="Enter the student first name">
+    </div>
+    <div
+      *ngIf="studentForm.dirty && studentForm.controls['firstName'].touched || studentForm.controls['firstName'].dirty">
+      <span class="error ion-padding" *ngIf="studentForm.controls['firstName'].errors?.['required']">
+        First name is required.
+      </span>
+
+    </div>
+    <div class="form-group mb-0">
+      <label for="name" class="required">Last name:</label>
+      <input type="text" class="form-control" formControlName="lastName" placeholder="Enter the student last name">
+    </div>
+    <div *ngIf="studentForm.dirty && studentForm.controls['lastName'].touched || studentForm.controls['lastName'].dirty">
+      <span class="error ion-padding" *ngIf="studentForm.controls['lastName'].errors?.['required']">
+        Last name is required.
+      </span>
+
+    </div>
+    <div class="form-group mb-0">
+      <label for="name" class="required">Student email:</label>
+      <input type="text" class="form-control" formControlName="email" name="studentEmail"
+        placeholder="Enter the student email" required>
+    </div>
+    <div *ngIf="studentForm.dirty && studentForm.controls['email'].touched || studentForm.controls['email'].dirty">
+      <span class="error ion-padding" *ngIf="studentForm.controls['email'].errors?.['required']">
+        Email is required.
+      </span>
+      <span class="error ion-padding" *ngIf="studentForm.controls['email'].errors?.['email']">
+        Must be an email.
+      </span>
+
+    </div>
+    <br>
+    <h3 class="text-center">
+      Activities
+    </h3>
+    <div class="container-fluid">
+      <div class="row bg-dark" style="color: white;">
+        <div class="col-4 text-center  p-0" style="border-right: 1px solid white;">Created at</div>
+        <div class="col-4 text-center  p-0" style="border-right: 1px solid white;">Acitivity</div>
+        <div class="col-3 text-center   p-0" style="border-right: 1px solid white;">Grade</div>
+        <div class="col-1 text-center   p-0" style="border-right: 1px solid white;">#</div>
+      </div>
+      <div class="row alternating-staining list-group-item  p-0" style="display: flex;" *ngFor="let activity of student.activities; let i = index">
+        <div class="col-4 border_right center-XY ">{{activity.createdAt | date}}</div>
+        <div class="col-4 border_right center-XY">{{activity.name}}</div>
+        <div class="col-3 border_right center-XY" >
+          <div >{{activity.grade}}</div>
+        </div>
+        <!-- <div class="col-3 border_right center-XY">
+
+
+            <input type="text" class="form-control p-0" placeholder="Enter grade.." > <span class="btn btn-primary" (click)="editActivity(i, activity.grade)" style="font-size: 12px;">edit</span>
+
+        </div> -->
+
+        <div class="col-1  center-XY  text-center">
+
+          <div class="col-6 center-XY p-0">
+            <span style="font-size: 16px; color:#dc3545;"  class="btn btn-tool p-0"
+              (click)="revmoveActivity(activity._id)"><i class="bi bi-x-circle-fill"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="closeModalFunc()" data-dismiss="modal">Close</button>
+  <button class="btn btn-primary"  type="submit" id="">Submit</button>
+</div>
+  </form>

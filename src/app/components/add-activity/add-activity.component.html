@@ -1,0 +1,27 @@
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content" *ngIf="studentToAddActivity">
+    <div class="modal-header">
+      <h2 class="modal-title" id="exampleModalLongTitle">Add activity for student {{studentToAddActivity.firstName}}
+        {{studentToAddActivity.lastName}}</h2>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group mb-0">
+          <label for="name" class="required">Activity:</label>
+          <input type="text" class="form-control" name="activity"  [(ngModel)]="activityName" placeholder="Example activities: 'Test', 'Activity', 'Essay', 'Interrogation', 'Homework'">
+        </div>
+        <div class="form-group mb-0">
+          <label for="name" class="required">Grade:</label>
+          <input type="string" class="form-control" name="grade"  [(ngModel)]="grade" placeholder="Example grades: '1', '2', '3', '4', '+', '-', 'A', 'B', 'C'">
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-success" (click)="addActivity()">Add</button>
+    </div>
+  </div>
+</div>

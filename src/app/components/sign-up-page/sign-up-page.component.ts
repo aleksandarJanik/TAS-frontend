@@ -18,12 +18,13 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-sign-up-page',
   templateUrl: './sign-up-page.component.html',
-  styleUrls: ['./sign-up-page.component.css'],
+  styleUrls: ['./sign-up-page.component.scss'],
 })
 export class SignUpPageComponent implements OnInit, OnDestroy {
   @Select(UserState.getUser) user$: Observable<UserStateModel>;
   userSub: Subscription;
   registerForm: FormGroup;
+  public showPassword: boolean;
   constructor(
     private authService: AuthService,
     public formBuilder: FormBuilder,

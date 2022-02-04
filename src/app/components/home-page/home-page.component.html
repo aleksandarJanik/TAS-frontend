@@ -1,2 +1,172 @@
-<p>home-page works!</p>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="infoModal" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">About us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+          <div class="modal-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+                  aria-controls="home" aria-selected="true">Home page</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+                  aria-controls="profile" aria-selected="false">Class details</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button"
+                  role="tab" aria-controls="messages" aria-selected="false">Settings</button>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="container-fluid mt-2 mt-2 text-center">
+
+                  <div class="card mb-2" style="width: 25rem; margin: 0 auto;">
+                    <img class="card-img-top" src="assets/images/createClass.png">
+                    <div class="card-body">
+                      <h5 class="card-title">Add class</h5>
+                      <p class="card-text">The page contains a field for adding a new class.
+                      </p>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 25rem; margin: 0 auto;">
+                    <img class="card-img-top" src="assets/images/showClasses.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Display classes</h5>
+                      <p class="card-text">It also display all the classes that the teacher will create. With Clicking on the top
+                        of each class will display the details.
+                      </p>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="container-fluid mt-2 text-center">
+
+                  <div class="card mb-2 mt-2" style="width: 25rem; margin: 0 auto;">
+                    <img class="card-img-top" src="assets/images/createStudent.png">
+                    <div class="card-body">
+                      <h5 class="card-title">Add student</h5>
+                      <p class="card-text">The page contains a field for adding a new student. It's required to import the Name,
+                        surname and email of the student
+                      </p>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+                  <div class="card mb-2" style="width: 25rem; margin: 0 auto;">
+                    <img class="card-img-top" src="assets/images/showClasses.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Display students</h5>
+                      <p class="card-text">
+                        For each student in the table we keep:
+                        In the first column is he present at the class.
+                        In the second column The student's name and surname.
+                        In the third column the student's activities.
+                        In the fourth column the student's email.
+                        In the fifth column buttons for deleting and changing student information.
+                      </p>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+                  <div class="card mb-2" style="width: 25rem; margin: 0 auto;">
+                    <img class="card-img-top" src="assets/images/searchStudet.png">
+                    <img class="card-img-top" src="assets/images/exportStudents.png">
+                    <div class="card-body">
+                      <h5 class="card-title">Search students and export in csv</h5>
+                      <p class="card-text">The page contains a field for searching a student and export students from each class.
+                      </p>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+
+                <div class="card mb-2 mt-2" style="width: 25rem; margin: 0 auto;">
+                  <div class="card-body">
+                    <h5 class="card-title">Change password option</h5>
+                    <p class="card-text">Would you like to change your password?
+                    </p>
+                    <a href="change-password" class="btn btn-primary">Click here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="headerHome bg-dark" style="color: white;">
+  <br>
+  <h1 class="text-center">Home page</h1>
+  <br>
+</div>
+<!-- <div *ngFor="let c of classes">
+  <p (click)="navigateToFirst(c.id)">{{c.name}}</p>
+  </div> -->
+<div class="container-fluid " style="height: 100%;">
+  <div class="card" style="min-height: 70%;">
+    <div class="card-header">
+      <h4 class="m-0 text-center fw-bold">
+        <button class="btn btn-info" data-toggle="modal" data-target="#infoModal" style="float: left; color:white"><i class="bi bi-info-circle "></i></button>
+        <span style="margin-right: 3rem;">CLASSES</span></h4>
+    </div>
+    <br>
+    <app-add-class (classCreated)="reloadClasses()" ></app-add-class>
+
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+
+
+          <div class="col-12"></div>
+          <br>
+          <div class="col-12 col-md-4 p-2" *ngFor="let c of classesFromDb">
+            <div class="card">
+              <div class="card-header list-group-item-info fw-bold each_class" routerLink="/class/{{c._id}}" style="cursor: pointer;">{{c.name}}</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Name of class: <b>{{c.name}}</b> </li>
+                  <li class="list-group-item">School: <b>{{c.school}}</b> </li>
+                  <li class="list-group-item">Delete class: <button class="btn btn-warning" (click)="deleteClass(c._id, c.name)" >Delete</button> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <button class="btn btn-danger" (click)="logout()" type="button" id="logaOut">Log out</button>
+

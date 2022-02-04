@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { UserState } from './ngxs-store/user/user.state';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     NgxsModule.forRoot([UserState], {}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     {
