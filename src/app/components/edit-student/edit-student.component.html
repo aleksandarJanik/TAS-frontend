@@ -1,4 +1,4 @@
-
+<!--
   <form [formGroup]="studentForm" #editFormEl (ngSubmit)="editStudent()" id="addClassForm">
 <div class="modal-body">
 
@@ -55,12 +55,7 @@
         <div class="col-3 border_right center-XY" >
           <div >{{activity.grade}}</div>
         </div>
-        <!-- <div class="col-3 border_right center-XY">
 
-
-            <input type="text" class="form-control p-0" placeholder="Enter grade.." > <span class="btn btn-primary" (click)="editActivity(i, activity.grade)" style="font-size: 12px;">edit</span>
-
-        </div> -->
 
         <div class="col-1  center-XY  text-center">
 
@@ -79,4 +74,61 @@
   <button type="button" class="btn btn-secondary" (click)="closeModalFunc()" data-dismiss="modal">Close</button>
   <button class="btn btn-primary"  type="submit" id="">Submit</button>
 </div>
+  </form> -->
+
+
+
+
+  <h2 mat-dialog-title style="text-align: center;">Edit Student</h2>
+  <form class="editStudent-form" #studentform style="margin: 0 auto;" [formGroup]="studentForm" (ngSubmit)="editStudent()" id="editClassForm">
+    <mat-dialog-content class="mat-typography">
+
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="First name" formControlName="firstName" value="">
+        <span *ngIf="studentForm.dirty && studentForm.controls['firstName'].touched || studentForm.controls['firstName'].dirty">
+          <mat-error class="" *ngIf="studentForm.controls['firstName'].errors?.['required']">
+            First name is required.
+          </mat-error>
+
+        </span>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput type="text" formControlName="lastName">
+        <span *ngIf="studentForm.dirty && studentForm.controls['lastName'].touched || studentForm.controls['lastName'].dirty">
+          <mat-error class="" *ngIf="studentForm.controls['lastName'].errors?.['required']">
+            Last name is required.
+          </mat-error>
+
+        </span>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="text"  formControlName="email" >
+        <span *ngIf="studentForm.dirty && studentForm.controls['email'].touched || studentForm.controls['email'].dirty">
+          <mat-error class="" *ngIf="studentForm.controls['email'].errors?.['required']">
+            Email is required.
+          </mat-error>
+          <mat-error *ngIf="studentForm.controls['email'].errors?.['email']">
+                Must be an email.
+
+          </mat-error>
+
+        </span>
+      </mat-form-field>
+
+
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close >Cancel</button>
+      <button mat-button cdkFocusInitial class="btn btn-primary" type="submit">Update</button>
+    </mat-dialog-actions>
   </form>

@@ -1,25 +1,18 @@
-<div class="bg-dark text-white">
-  <br>
-  <h1 class="text-center">Class <span *ngIf="classFromDb">{{classFromDb.name}}</span></h1>
-  <br>
-</div>
-<div class="container-fluid bg-dark" style="height: 100%;">
-  <div class="card" style="min-height: 70%;">
-    <div class="card-header">
-      <h4 class="m-0 text-center fw-bold">
-        <button class="btn btn-success" (click)="startClassLecturing()" >START LECTURING</button>
-        <!-- <button class="btn btn-dark" style="float: left;" (click)="downloadFile()">Export in csv</button> -->
-          <button class="btn btn-tool" id="backToClassesBtn" routerLink="/home" style="float: right;"><i class="bi bi-arrow-left-circle-fill" style="margin-right: 2px;"></i>Back to classes</button>
-        <!-- <button class="btn btn-success" id="addStudent" style="float: right;">Add student</button> -->
 
-      </h4>
+
+
+
+
+    <div class="card-header">
+      <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;" *ngIf="classFromDb">{{classFromDb.name}}</span></h1>
     </div>
+    <br>
 
   <app-add-student (addStudentEmmiter)="getStudents()"></app-add-student>
-<br>
-  <h4 style="text-align: center;">Students</h4>
 
-    <div class="container-fluid  mt-3">
+
+
+    <!-- <div class="container-fluid  mt-3">
       <div class="row bg-dark" style="color:white;">
         <div class="col-1 center-XY   p-0" style="border-right: 1px solid white;">
           <div class="threeDots">Present in class</div>
@@ -53,21 +46,20 @@
           </div>
       </div>
       </div>
-    </div>
+    </div> -->
 
 
 
 
-</div>
-<button class="btn btn-danger" (click)="logout()" type="button" id="logaOut">Log out</button>
 
-<!-- Modal -->
-<div class="modal fade"  id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
- <app-add-activity *ngIf="studentToAddActivity" [studentToAddActivity]="studentToAddActivity" (addActivityEmmiter)="getStudents()" [classId]="classId"></app-add-activity>
-</div>
 
-<!-- Modal -->
+<!--
+  <div class="modal fade"  id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+  <app-add-activity *ngIf="studentToAddActivity" [studentToAddActivity]="studentToAddActivity" (addActivityEmmiter)="getStudents()" [classId]="classId"></app-add-activity>
+  </div>
+
+
 <div class="modal fade bd-example-modal-lg"  id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -82,4 +74,89 @@
 
     </div>
   </div>
-</div>
+</div> -->
+
+
+<mat-card class="employee-table-wrapper">
+  <mat-card-title class="employee-table-wrapper__header">
+    <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Student List</p>
+    <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+      <div class="employee-table-wrapper__icon-wrapper">
+        <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+      </div>
+      <input matInput class="employee-table-wrapper__search-input" (keyup)="applyFilter($event)">
+      <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+        <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
+      </button>
+    </div>
+    <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+      <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+    </button>
+  </mat-card-title>
+  <mat-card-content class="employee-table__content">
+    <table class="employee-table__table" *ngIf="dataSource" mat-table [dataSource]="dataSource">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>
+         Present
+
+        </th>
+        <td class="employee-table__table-checkbox" mat-cell *matCellDef="let row">
+
+          <mat-checkbox color="primary" [(ngModel)]="row.isPresent" [checked]="row.isPresent === true" >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="student">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Student </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}} </td>
+      </ng-container>
+
+      <!-- Company Column -->
+      <ng-container matColumnDef="email">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Email </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- City Column -->
+      <ng-container matColumnDef="activities">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Activities </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+          <div class="threeDots">
+           <span *ngFor="let a of element.activities"><span *ngIf="a.name !== 'activity'">{{a.name}}</span> {{a.grade}}, &nbsp;</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="set">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Settings</th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+          <button class="settings-button" style="outline: 1px dotted;" (click)="onEvent($event)" mat-mini-fab [matMenuTriggerFor]="settings">
+            <mat-icon class="settings-button__icon">more_vert</mat-icon>
+          </button>
+          <div class="settings-menu">
+            <mat-menu #settings="matMenu" xPosition="before">
+              <button class="settings-menu__item" mat-menu-item (click)="openModalToEditStudent(element)">Edit</button>
+              <button class="settings-menu__item" mat-menu-item (click)="revmoveStudent(element._id)">Delete</button>
+              <button class="settings-menu__item" mat-menu-item (click)="openModalToAddactivity(element)">Add activity</button>
+              <button class="settings-menu__item" mat-menu-item (click)="openModalToEditactivities(element)">Edit activities</button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+      </tr>
+    </table>
+  </mat-card-content>
+  <div class="pagination">
+      <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"
+        >
+      </mat-paginator>
+  </div>
+</mat-card>

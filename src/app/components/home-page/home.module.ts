@@ -8,4 +8,4 @@ import { HomeRoutingModule } from './home-routing.module';
   declarations: [HomePageComponent],
   imports: [CommonModule, SharedModule, HomeRoutingModule],
 })
-export class LoginModule {}
+export class HomeModule {}

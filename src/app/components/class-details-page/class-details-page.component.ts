@@ -1,4 +1,8 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Activity } from 'src/app/models/activity.model';
 import { Class } from 'src/app/models/class.model';
@@ -7,25 +11,37 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ClassService } from 'src/app/services/class.service';
 import { StudentService } from 'src/app/services/student.service';
 import Swal from 'sweetalert2';
+import { AddActivityComponent } from '../add-activity/add-activity.component';
+import { EditStudentComponent } from '../edit-student/edit-student.component';
 
 @Component({
   selector: 'app-class-details-page',
   templateUrl: './class-details-page.component.html',
-  styleUrls: ['./class-details-page.component.css'],
+  styleUrls: ['./class-details-page.component.scss'],
 })
 export class ClassDetailsPageComponent implements OnInit {
   students: Student[] = [];
   classId: any;
   classFromDb: Class;
-  studentToEdit: Student | null;
-  @ViewChild('closeModal') closeModal: any;
-  studentToAddActivity: Student;
+
+  public displayedColumns: string[] = [
+    'select',
+    'student',
+    'email',
+    'activities',
+    'set',
+  ];
+  public dataSource: MatTableDataSource<Student>;
+  public selection = new SelectionModel<Student>(true, []);
+  public isShowFilterInput = false;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private authService: AuthService,
     private studentService: StudentService,
     private route: ActivatedRoute,
-    private classService: ClassService
+    private classService: ClassService,
+    public dialog: MatDialog
   ) {}
 
   async ngOnInit() {
@@ -36,36 +52,17 @@ export class ClassDetailsPageComponent implements OnInit {
     console.log(this.students);
   }
 
-  openModalToEdit(student: Student) {
-    this.studentToEdit = student;
+  public applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  checkValue(student: Student): void {
-    student.isPresent = !student.isPresent;
+  public showFilterInput(): void {
+    this.isShowFilterInput = !this.isShowFilterInput;
   }
 
-  startClassLecturing() {
-    let presentStudents = this.students.filter((s) => s.isPresent === true);
-    this.studentService.presentStudents = presentStudents;
-    localStorage.setItem('presentStudents', JSON.stringify(presentStudents));
-    // console.log(JSON.stringify(this.presentStudents));
-    // let childWindow = window.open("http://localhost:4200/pick", "_blank");
-
-    // const BrowserWindow = this.electronService.remote.BrowserWindow;
-    // let childWindow = new BrowserWindow({
-    //   resizable: false,
-    //   alwaysOnTop: true,
-    //   minimizable: false,
-    //   webPreferences: {
-    //     webSecurity: false,
-    //   },
-    // });
-    // let urlToLoad = this.electronService.url.format({
-    //   pathname: this.electronService.path.join(__dirname),
-    //   protocol: 'file:',
-    //   slashes: true,
-    // });
-    // childWindow.loadURL(urlToLoad + '/#/pick');
+  onEvent(event: any) {
+    event.stopPropagation();
   }
 
   async revmoveStudent(studentId: string) {
@@ -83,29 +80,52 @@ export class ClassDetailsPageComponent implements OnInit {
       try {
         this.studentService.removeStudent(this.classId, studentId);
         this.students = this.students.filter((s) => s._id !== studentId);
+        this.dataSource = new MatTableDataSource<Student>(this.students);
+        this.dataSource.paginator = this.paginator;
       } catch (e) {}
     }
   }
 
-  modalClose() {
-    this.studentToEdit = null;
-    this.closeModal.nativeElement.click();
-  }
   async getStudents() {
     this.students = await this.studentService.getStudentsByClassId(
       this.classId
     );
+
     this.students.forEach((s) => {
       s.isPicked = false;
       s.isPresent = true;
     });
+    this.dataSource = new MatTableDataSource<Student>(this.students);
+    this.dataSource.paginator = this.paginator;
   }
 
-  openModalToAddActivity(student: Student) {
-    this.studentToAddActivity = student;
+  openModalToEditStudent(student: Student) {
+    let dialogRef = this.dialog.open(EditStudentComponent, {
+      height: '415px',
+      width: '400px',
+      data: { student, classId: this.classId },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.data === 'confirmed') {
+        this.getStudents();
+      }
+    });
   }
 
-  async logout() {
-    await this.authService.logout();
+  openModalToAddactivity(student: Student) {
+    let dialogRef = this.dialog.open(AddActivityComponent, {
+      height: '315px',
+      width: '400px',
+      data: { student, classId: this.classId },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.data === 'confirmed') {
+        this.getStudents();
+      }
+    });
+  }
+
+  openModalToEditactivities(student:Student){
+
   }
 }

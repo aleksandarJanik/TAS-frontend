@@ -1,0 +1,33 @@
+<div class="card-header">
+  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;">CLASSES</span></h1>
+</div>
+<br>
+<app-add-class (classCreated)="reloadClasses()"></app-add-class>
+
+<div class="card-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+
+
+      <div class="col-12"></div>
+      <br>
+      <div class="col-12 col-md-4 p-2" *ngFor="let c of classesFromDb">
+        <div class="card">
+          <div class="card-header list-group-item-info fw-bold each_class" routerLink="/class/{{c._id}}"
+            style="cursor: pointer; background: #3f51b5 !important; color: white;">{{c.name}}</div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Name of class: <b>{{c.name}}</b> </li>
+              <li class="list-group-item">School: <b>{{c.school}}</b> </li>
+              <li class="list-group-item">Delete class: <button class="btn btn-warning"
+                  (click)="deleteClass(c._id, c.name)">Delete</button> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

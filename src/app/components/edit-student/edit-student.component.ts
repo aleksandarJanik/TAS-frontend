@@ -1,9 +1,11 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   Output,
   SimpleChanges,
   ViewChild,
@@ -14,6 +16,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Activity } from 'src/app/models/activity.model';
 import { Student, StudentDto } from 'src/app/models/student.model';
 import { ActivityService } from 'src/app/services/activity.service';
@@ -26,19 +29,22 @@ import Swal from 'sweetalert2';
   styleUrls: ['./edit-student.component.css'],
 })
 export class EditStudentComponent implements OnInit {
-  @Input() student: Student;
-  @Input() classId: string;
-  @Output() closeModal: EventEmitter<void> = new EventEmitter();
-  @Output() addStudentEmmiter: EventEmitter<void> = new EventEmitter();
-  @ViewChild('editFormEl') editFormEl: any;
+  student: Student;
+  classId: string;
+  // @Output() addStudentEmmiter: EventEmitter<void> = new EventEmitter();
+  // @ViewChild('editFormEl') editFormEl: any;
   studentForm: FormGroup;
   constructor(
     public formBuilder: FormBuilder,
     private studentService: StudentService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    public dialogRef: MatDialogRef<EditStudentComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit() {
+    this.student = this.data.student;
+    this.classId = this.data.classId;
     console.log(this.student);
     this.studentForm = this.formBuilder.group({
       // username: ['', [Validators.required, Validators.minLength(6)]],
@@ -51,12 +57,10 @@ export class EditStudentComponent implements OnInit {
       }),
     });
   }
-  submitEditForm() {
-    this.editFormEl.nativeElement.submit();
-  }
-  closeModalFunc() {
-    this.closeModal.emit();
-  }
+  // submitEditForm() {
+  //   this.editFormEl.nativeElement.submit();
+  // }
+
   async editStudent() {
     if (!this.studentForm.valid) {
       Swal.fire({
@@ -83,8 +87,7 @@ export class EditStudentComponent implements OnInit {
           studentDto,
           this.student._id
         );
-        this.closeModal.emit();
-        this.addStudentEmmiter.emit();
+        this.dialogRef.close({ data: 'confirmed' });
       } catch (e: any) {
         Swal.fire({
           icon: 'error', //"success" | "error" | "warning" | "info" | "question"

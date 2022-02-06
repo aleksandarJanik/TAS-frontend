@@ -88,6 +88,8 @@ export class AuthService {
         loaded: true,
         loggedIn: false,
       };
+      await this.storageService.removeAccessToken();
+      await this.storageService.removeRefreshToken();
     }
 
     await lastValueFrom(this.store.dispatch(new AddUser(user)));

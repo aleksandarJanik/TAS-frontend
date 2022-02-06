@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-dialog-centered" role="document">
+<!-- <div class="modal-dialog modal-dialog-centered" role="document">
   <div class="modal-content" *ngIf="studentToAddActivity">
     <div class="modal-header">
       <h2 class="modal-title" id="exampleModalLongTitle">Add activity for student {{studentToAddActivity.firstName}}
@@ -24,4 +24,38 @@
       <button type="button" class="btn btn-success" (click)="addActivity()">Add</button>
     </div>
   </div>
-</div>
+</div> -->
+
+
+<h2 mat-dialog-title style="text-align: center;">Add activity for student {{studentToAddActivity.firstName}}</h2>
+
+  <mat-dialog-content class="mat-typography">
+
+
+    <div class="example-full-width" appearance="fill">
+        <label for="name" class="required">Activity:</label>
+        <input type="text" class="form-control" name="activity" [(ngModel)]="activityName"
+          placeholder="Example activities: 'Test', 'Activity', 'Essay', 'Interrogation', 'Homework'">
+    </div>
+
+
+    <div class="example-full-width" appearance="fill">
+    <div class="form-group mb-0">
+      <label for="name" class="required">Grade:</label>
+      <input type="string" class="form-control" name="grade" [(ngModel)]="grade"
+        placeholder="Example grades: '1', '2', '3', '4', '+', '-', 'A', 'B', 'C'">
+    </div>
+  </div>
+
+
+
+
+
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial class="btn btn-success" type="submit" (click)="addActivity()">Add</button>
+  </mat-dialog-actions>
+
