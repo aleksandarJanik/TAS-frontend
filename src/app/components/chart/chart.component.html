@@ -1,0 +1,16 @@
+
+
+<mat-card class="revenue-chart">
+  <mat-card-title class="revenue-chart__header" style="">
+    <h3 class="revenue-chart__header-title">Class: {{data.name}}</h3>
+    <h3>Average rate: {{data.averageGrade | number : '1.2-2'}}</h3>
+  </mat-card-title>
+
+  <mat-card-content class="revenue-chart__content">
+    <div  class="revenue-chart__content-chart">
+        <canvas  baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"></canvas>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

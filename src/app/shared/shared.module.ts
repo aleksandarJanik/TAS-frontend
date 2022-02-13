@@ -47,10 +47,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AddClassComponent, AddStudentComponent, FooterComponent],
+  declarations: [AddClassComponent, AddStudentComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule],
   exports: [
     CommonModule,
@@ -104,7 +103,6 @@ import { FooterComponent } from './components/footer/footer.component';
     PortalModule,
     ScrollingModule,
     ReactiveFormsModule,
-    FooterComponent,
   ],
 })
 export class SharedModule {}

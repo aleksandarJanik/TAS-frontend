@@ -49,6 +49,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'class/:id/student/:studentId',
+    loadChildren: () =>
+      import('./components/view-activities-page/view-activities.module').then(
+        (m) => m.ViewActivitiesModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',

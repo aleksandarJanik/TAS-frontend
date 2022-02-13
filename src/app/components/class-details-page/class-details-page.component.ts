@@ -13,6 +13,7 @@ import { StudentService } from 'src/app/services/student.service';
 import Swal from 'sweetalert2';
 import { AddActivityComponent } from '../add-activity/add-activity.component';
 import { EditStudentComponent } from '../edit-student/edit-student.component';
+import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 
 @Component({
   selector: 'app-class-details-page',
@@ -106,7 +107,7 @@ export class ClassDetailsPageComponent implements OnInit {
       data: { student, classId: this.classId },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.data === 'confirmed') {
+      if (result && result.data === 'confirmed') {
         this.getStudents();
       }
     });
@@ -119,13 +120,60 @@ export class ClassDetailsPageComponent implements OnInit {
       data: { student, classId: this.classId },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.data === 'confirmed') {
+      if (result && result.data === 'confirmed') {
         this.getStudents();
       }
     });
   }
 
-  openModalToEditactivities(student:Student){
+  exportInCsv() {
+    let maxLengthActivities = 0;
+    let arrToExport = this.students.map((student) => {
+      let activities: any = new Object();
+      if (student.activities) {
+        if (student.activities.length > maxLengthActivities) {
+          maxLengthActivities = student.activities.length;
+        }
+        student.activities.forEach((activity, index) => {
+          activities[`Activity_${index}`] = activity.name;
+          activities[`Grade_${index}`] = activity.grade;
 
+          // activities.push({ activity_1: activity.name });
+          // activities.push({ grade_1: activity.grade });
+        });
+      }
+
+      return {
+        class: this.classFromDb.name,
+        first_name: student.firstName,
+        last_name: student.lastName,
+        email: student.email,
+        ...activities,
+      };
+    });
+    let arrAc = [];
+    for (let i = 1; i <= maxLengthActivities; i++) {
+      let ac = `Activity_${i}`;
+      let gr = `Grade_${i}`;
+      arrAc.push(ac);
+      arrAc.push(gr);
+    }
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: `Class ${this.classFromDb.name}`,
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+      useHeader: false,
+      nullToEmptyString: true,
+      headers: ['Class', 'First Name', 'Last name', 'mail', ...arrAc],
+    };
+    console.log(arrToExport);
+
+    new AngularCsv(arrToExport, `Class_${this.classFromDb.name}`, options);
   }
 }

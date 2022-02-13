@@ -135,3 +135,7 @@
 .ping {
   background-color: $pink;
 }
+
+button:focus {
+  outline: 1px dotted !important;
+}

@@ -4,14 +4,18 @@
 </div>
 <br>
 
+<div class="container-fluid">
+  <h2 style="text-align: center;">Classes average grades</h2>
+  <div class="row">
+    <div class="col-4" *ngFor="let c of classes">
+      <app-chart [data]="c"></app-chart>
+    </div>
+  </div>
+</div>
 
 
 
 
 
-
-
-
-<app-footer></app-footer>
 
 

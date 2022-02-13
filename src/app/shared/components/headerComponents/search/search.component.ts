@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +11,16 @@ export class SearchComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  public showInput(): void {
+
+  @HostListener('click', ['$event'])
+  public showInput(event: any): void {
+    console.log(event);
+    event.stopPropagation();
     this.isShowInput = true;
+  }
+
+  @HostListener('document:click')
+  clickout() {
+    this.isShowInput = false;
   }
 }

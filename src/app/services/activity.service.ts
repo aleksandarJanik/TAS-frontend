@@ -34,9 +34,13 @@ export class ActivityService {
     return activity;
   }
 
-  async updateActivity(
-    activityId: string,
-    classId: string,
-    studentId: string
-  ) {}
+  async updateActivity(activityDto: ActivityDto, activityId: string) {
+    let activity = await lastValueFrom(
+      this.http.put<Activity>(
+        `${AppConstants.API_URL}/activity/${activityId}`,
+        activityDto
+      )
+    );
+    return activity;
+  }
 }

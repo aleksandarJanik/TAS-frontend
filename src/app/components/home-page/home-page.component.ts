@@ -1,9 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Class } from 'src/app/models/class.model';
-import { AuthService } from 'src/app/services/auth.service';
+import { ClassWithStats } from 'src/app/models/class.model';
 import { ClassService } from 'src/app/services/class.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-page',
@@ -11,7 +8,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
-  constructor() {}
-
-  async ngOnInit() {}
+  classes: ClassWithStats[];
+  constructor(private classService: ClassService) {}
+  async ngOnInit() {
+    this.classes = await this.classService.getClassesWithStats();
+    console.log(this.classes);
+  }
 }

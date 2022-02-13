@@ -25,6 +25,15 @@ export class StudentService {
     return students;
   }
 
+  async getStudentById(studentId: any) {
+    let students = await lastValueFrom(
+      this.http.get<Student>(
+        `${AppConstants.API_URL}/student/findOne/${studentId}`
+      )
+    );
+    return students;
+  }
+
   async removeStudent(classId: any, studentId: any) {
     let students = await lastValueFrom(
       this.http.delete<Student>(

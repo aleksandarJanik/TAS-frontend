@@ -1,0 +1,70 @@
+<mat-card class="employee-table-wrapper">
+  <mat-card-title class="employee-table-wrapper__header">
+    <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Activity List for {{student?.firstName}} {{student?.lastName}}</p>
+    <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+      <div class="employee-table-wrapper__icon-wrapper">
+        <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+      </div>
+      <input matInput class="employee-table-wrapper__search-input" (keyup)="applyFilter($event)">
+      <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+        <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
+      </button>
+    </div>
+    <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+      <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+    </button>
+  </mat-card-title>
+  <mat-card-content class="employee-table__content">
+    <table class="employee-table__table" *ngIf="dataSource" mat-table [dataSource]="dataSource">
+
+
+
+
+      <ng-container matColumnDef="createdAt">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Created At </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.createdAt | date}}
+
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="acitivity">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Acitivity </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.name}}
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="grade">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> grade </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+        {{element.grade}}
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="set">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Settings</th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+          <button class="settings-button" style="outline: 1px dotted;"  mat-mini-fab
+            [matMenuTriggerFor]="settings">
+            <mat-icon class="settings-button__icon">more_vert</mat-icon>
+          </button>
+          <div class="settings-menu">
+            <mat-menu #settings="matMenu" xPosition="before">
+              <button class="settings-menu__item" (click)="updateActivity(element._id)" mat-menu-item >Edit</button>
+              <button class="settings-menu__item" (click)="revmoveActivity(element._id)" mat-menu-item >Delete</button>
+
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" >
+  </tr>
+    </table>
+  </mat-card-content>
+
+</mat-card>

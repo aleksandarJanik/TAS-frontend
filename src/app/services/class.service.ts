@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { Class, ClassDto } from '../models/class.model';
+import { Class, ClassDto, ClassWithStats } from '../models/class.model';
 import { AppConstants } from '../shared/constants';
 
 @Injectable({
@@ -35,5 +35,14 @@ export class ClassService {
       this.http.get<Class>(`${AppConstants.API_URL}/class/${classId}`)
     );
     return classFromDb;
+  }
+
+  async getClassesWithStats(): Promise<ClassWithStats[]> {
+    let classes: ClassWithStats[] = await lastValueFrom(
+      this.http.get<ClassWithStats[]>(
+        `${AppConstants.API_URL}/class/with-statistics`
+      )
+    );
+    return classes;
   }
 }

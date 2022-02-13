@@ -15,3 +15,12 @@ export class Class {
 export class ClassDto {
   name: string;
 }
+
+export class ClassWithStats extends Class {
+  averageGrade: number;
+  numGradeOne: number;
+  numGradeTwo: number;
+  numGradeThree: number;
+  numGradeFour: number;
+  numGradeFive: number;
+}

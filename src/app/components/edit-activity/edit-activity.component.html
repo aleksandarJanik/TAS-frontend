@@ -1,0 +1,43 @@
+<h2 mat-dialog-title style="text-align: center;">Edit Activity</h2>
+<form class="editStudent-form" #studentform style="margin: 0 auto;" *ngIf="activity" [formGroup]="activityForm" (ngSubmit)="editactivity()" id="editClassForm">
+  <mat-dialog-content class="mat-typography">
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Activity</mat-label>
+      <input matInput placeholder="Activity" formControlName="name" value="">
+      <span
+        *ngIf="activityForm.dirty && activityForm.controls['name'].touched || activityForm.controls['name'].dirty">
+        <mat-error class="" *ngIf="activityForm.controls['name'].errors?.['required']">
+          Activity is required.
+        </mat-error>
+
+      </span>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Grade</mat-label>
+      <input matInput placeholder="Grade" formControlName="grade" value="">
+      <span
+        *ngIf="activityForm.dirty && activityForm.controls['grade'].touched || activityForm.controls['grade'].dirty">
+        <mat-error class="" *ngIf="activityForm.controls['grade'].errors?.['required']">
+          Grade is required.
+        </mat-error>
+
+      </span>
+    </mat-form-field>
+
+
+
+
+
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial class="btn btn-primary" type="submit">Update</button>
+  </mat-dialog-actions>
+</form>
+
+

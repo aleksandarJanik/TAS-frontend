@@ -18,8 +18,7 @@ import { SearchComponent } from './shared/components/headerComponents/search/sea
 import { UserComponent } from './shared/components/headerComponents/user/user.component';
 import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
 import { ShortNamePipe } from './shared/pipes/short-name';
-import { ClassPageComponent } from './components/class-page/class-page.component';
-import { TestsPageComponent } from './components/tests-page/tests-page.component';
+import { EditActivityComponent } from './components/edit-activity/edit-activity.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +30,7 @@ import { TestsPageComponent } from './components/tests-page/tests-page.component
     SearchComponent,
     UserComponent,
     ShortNamePipe,
+    EditActivityComponent,
   ],
   imports: [
     BrowserModule,
