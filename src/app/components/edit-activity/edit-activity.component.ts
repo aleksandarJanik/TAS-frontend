@@ -15,6 +15,14 @@ export class EditActivityComponent implements OnInit {
   classId: string;
   activity: Activity;
   activityForm: FormGroup;
+  optionsActivity: string[] = [
+    'Test',
+    'Activity',
+    'Essay',
+    'Interrogation',
+    'Homework',
+  ];
+  optionsGrades: string[] = ['+', '-', '1', '2', '3', '4', '5'];
   constructor(
     private activityService: ActivityService,
     public dialogRef: MatDialogRef<EditActivityComponent>,

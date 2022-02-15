@@ -24,6 +24,14 @@ export class AddActivityComponent implements OnInit {
   // @Output() addActivityEmmiter: EventEmitter<void> = new EventEmitter();
   activityName: string = '';
   grade: string = '';
+  optionsActivity: string[] = [
+    'Test',
+    'Activity',
+    'Essay',
+    'Interrogation',
+    'Homework',
+  ];
+  optionsGrades: string[] = ['+', '-', '1', '2', '3', '4', '5'];
   constructor(
     private activityService: ActivityService,
     public dialogRef: MatDialogRef<AddActivityComponent>,

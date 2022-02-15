@@ -25,6 +25,7 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
   userSub: Subscription;
   registerForm: FormGroup;
   public showPassword: boolean;
+  public showPasswordConfirm: boolean;
   constructor(
     private authService: AuthService,
     public formBuilder: FormBuilder,

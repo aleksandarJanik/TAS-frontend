@@ -5,7 +5,12 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Activity</mat-label>
-      <input matInput placeholder="Activity" formControlName="name" value="">
+      <input matInput placeholder="Activity" formControlName="name" autocomplete="off" [matAutocomplete]="auto" value="">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of optionsActivity" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
       <span
         *ngIf="activityForm.dirty && activityForm.controls['name'].touched || activityForm.controls['name'].dirty">
         <mat-error class="" *ngIf="activityForm.controls['name'].errors?.['required']">
@@ -17,7 +22,12 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Grade</mat-label>
-      <input matInput placeholder="Grade" formControlName="grade" value="">
+      <input matInput placeholder="Grade" formControlName="grade" value="" autocomplete="off" [matAutocomplete]="autoTest">
+      <mat-autocomplete #autoTest="matAutocomplete">
+        <mat-option *ngFor="let o of optionsGrades" [value]="o">
+          {{o}}
+        </mat-option>
+      </mat-autocomplete>
       <span
         *ngIf="activityForm.dirty && activityForm.controls['grade'].touched || activityForm.controls['grade'].dirty">
         <mat-error class="" *ngIf="activityForm.controls['grade'].errors?.['required']">

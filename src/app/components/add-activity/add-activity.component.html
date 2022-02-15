@@ -34,16 +34,24 @@
 
     <div class="example-full-width" appearance="fill">
         <label for="name" class="required">Activity:</label>
-        <input type="text" class="form-control" name="activity" [(ngModel)]="activityName"
-          placeholder="Example activities: 'Test', 'Activity', 'Essay', 'Interrogation', 'Homework'">
+        <input type="text" class="form-control" name="activity" autocomplete="off" [matAutocomplete]="auto" [(ngModel)]="activityName" placeholder="Example activities: 'Test', 'Activity', 'Essay', 'Interrogation', 'Homework'">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of optionsActivity" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
     </div>
 
 
     <div class="example-full-width" appearance="fill">
     <div class="form-group mb-0">
       <label for="name" class="required">Grade:</label>
-      <input type="string" class="form-control" name="grade" [(ngModel)]="grade"
-        placeholder="Example grades: '1', '2', '3', '4', '+', '-', 'A', 'B', 'C'">
+      <input type="string" class="form-control" name="grade" autocomplete="off" [matAutocomplete]="autoTest" [(ngModel)]="grade" placeholder="Example grades: '1', '2', '3', '4', '+', '-', 'A', 'B', 'C'">
+      <mat-autocomplete #autoTest="matAutocomplete">
+        <mat-option *ngFor="let o of optionsGrades" [value]="o">
+          {{o}}
+        </mat-option>
+      </mat-autocomplete>
     </div>
   </div>
 

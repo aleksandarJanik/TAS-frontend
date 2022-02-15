@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Activity } from 'src/app/models/activity.model';
 import { Class } from 'src/app/models/class.model';
 import { Student } from 'src/app/models/student.model';
@@ -42,15 +42,15 @@ export class ClassDetailsPageComponent implements OnInit {
     private studentService: StudentService,
     private route: ActivatedRoute,
     private classService: ClassService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    router: Router
   ) {}
 
   async ngOnInit() {
+    // console.log(this.students);
     this.classId = this.route.snapshot.paramMap.get('id');
     this.classFromDb = await this.classService.getClassById(this.classId);
     await this.getStudents();
-
-    console.log(this.students);
   }
 
   public applyFilter(event: Event): void {
@@ -172,7 +172,7 @@ export class ClassDetailsPageComponent implements OnInit {
       nullToEmptyString: true,
       headers: ['Class', 'First Name', 'Last name', 'mail', ...arrAc],
     };
-    console.log(arrToExport);
+    // console.log(arrToExport);
 
     new AngularCsv(arrToExport, `Class_${this.classFromDb.name}`, options);
   }
