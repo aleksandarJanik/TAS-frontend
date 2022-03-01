@@ -33,11 +33,11 @@ export class StorageService {
     localStorage.removeItem(REFRESH_TOKEN_KEY);
   }
 
-  setColorTheme(isDark: boolean) {
-    return localStorage.setItem(COLOR_THEME_KEY, isDark + '');
+  setColorNote(color: string, noteId: string) {
+    return localStorage.setItem(noteId, color);
   }
 
-  getColorTheme() {
-    return localStorage.getItem(COLOR_THEME_KEY);
+  getColorNote(noteId: string) {
+    return localStorage.getItem(noteId);
   }
 }

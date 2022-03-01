@@ -1,0 +1,31 @@
+<h2 mat-dialog-title style="text-align: center;">Create Quiz</h2>
+<form class="quiz-form" style="margin: 0 auto;"  [formGroup]="quizForm" (ngSubmit)="createQuiz()" >
+  <mat-dialog-content class="mat-typography">
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Quiz</mat-label>
+      <input matInput placeholder="Quiz name" formControlName="name" autocomplete="off"  value="">
+
+      <span *ngIf="quizForm.dirty && quizForm.controls['name'].touched || quizForm.controls['name'].dirty">
+        <mat-error class="" *ngIf="quizForm.controls['name'].errors?.['required']">
+          Quiz name is required.
+        </mat-error>
+
+      </span>
+    </mat-form-field>
+
+
+
+
+
+
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial class="btn btn-primary" type="submit">Create</button>
+  </mat-dialog-actions>
+</form>
+

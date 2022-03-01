@@ -9,7 +9,7 @@
   <button mat-menu-item class="user-menu__item-title" routerLink="/settings">
     <mat-icon class="user-menu-icon">settings</mat-icon>Settings
   </button>
-  <button mat-menu-item class="user-menu__item-title">
+  <button mat-menu-item class="user-menu__item-title" (click)="openModalToCreateNote()">
     <mat-icon class="user-menu-icon">note</mat-icon>Create note
   </button>
   <!-- <button mat-menu-item class="user-menu__item-title">

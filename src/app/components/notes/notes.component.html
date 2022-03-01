@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <h2 style="text-align: center;">Notes</h2>
+  <div class="row">
+    <div class="col-6" *ngFor="let note of notes" style="margin-top: 0.5rem;">
+
+      <mat-card style="padding: 0px;" >
+          <div id="panel" style="display: flex; justify-content: right; align-items: center;" [style.background]="note.color? note.color : 'rgb(63, 81, 181)'">
+
+              <span class="button" >
+                <button class="" [style.background]="note.color " mat-menu-item   [matMenuTriggerFor]="settings" >
+                  <mat-icon class="color_white"> format_color_fill</mat-icon>
+                </button>
+                <div class="settings-menu">
+                  <mat-menu #settings="matMenu" xPosition="before">
+
+                    <!-- <button class="settings-menu__item" mat-menu-item style="text-align: center;"
+                      (click)="setColor('white', note._id)">
+                      <mat-icon style="color:wheat">color_lens</mat-icon>
+                    </button> -->
+                    <button class="settings-menu__item" mat-menu-item style="text-align: center;"
+                      (click)="setColor('#c3e6cb',  note._id)">
+                      <mat-icon style="color:#c3e6cb">color_lens</mat-icon>
+                    </button>
+                    <button class="settings-menu__item" mat-menu-item style="text-align: center;"
+                      (click)="setColor('#3f51b5',  note._id)">
+                      <mat-icon style="color: #3f51b5;">color_lens</mat-icon>
+                    </button>
+                    <button class="settings-menu__item" mat-menu-item style="text-align: center;"
+                      (click)="setColor('purple',  note._id)">
+                      <mat-icon style="color: purple">color_lens</mat-icon>
+                    </button>
+                    <button class="settings-menu__item" mat-menu-item style="text-align: center;"
+                      (click)="setColor('pink',  note._id)">
+                      <mat-icon style="color: pink;">color_lens</mat-icon>
+                    </button>
+                    <button class="settings-menu__item" mat-menu-item style="text-align: center;"
+                      (click)="setColor('gray',  note._id)">
+                      <mat-icon style="color: gray;">color_lens</mat-icon>
+                    </button>
+                  </mat-menu>
+                </div>
+              </span>
+              <span class="button">
+                <button class="settings-menu__item" mat-menu-item (click)="removeNote(note._id)">
+                    <mat-icon class="color_white">delete</mat-icon>
+                </button>
+              </span>
+
+          </div>
+          <!-- <mat-form-field class="example-full-width" appearance="fill" style="width: 100%; background: white !important; ">
+            <mat-label>{{note.key}}</mat-label>
+            <textarea matInput value="{{note.value}}" (focusout)="saveText(note._id, $event)" style="max-height: 20rem; min-height: 15px;"></textarea>
+
+          </mat-form-field> -->
+      </mat-card>
+      <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="note.value" (focusout)="saveText(note._id, $event)" style="max-height: 20rem; min-height: 15px;"></angular-editor>
+    </div>
+  </div>
+</div>
+

@@ -19,6 +19,8 @@ import { UserComponent } from './shared/components/headerComponents/user/user.co
 import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
 import { ShortNamePipe } from './shared/pipes/short-name';
 import { EditActivityComponent } from './components/edit-activity/edit-activity.component';
+import { CreateNoteModalComponent } from './components/create-note-modal/create-note-modal.component';
+import { CreateTestModalComponent } from './components/create-test-modal/create-test-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { EditActivityComponent } from './components/edit-activity/edit-activity.
     UserComponent,
     ShortNamePipe,
     EditActivityComponent,
+    CreateNoteModalComponent,
+    CreateTestModalComponent,
   ],
   imports: [
     BrowserModule,

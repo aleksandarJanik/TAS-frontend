@@ -1,0 +1,24 @@
+.button {
+  // position: absolute;
+  // right: 0;
+  // bottom: 86px;
+  // z-index: 1000;
+  opacity: 0.8;
+}
+.button:hover {
+  opacity: 1;
+}
+#panel {
+  height: 2rem;
+  width: 100%;
+}
+
+button:focus {
+  outline: none !important;
+}
+button {
+  background: none !important;
+}
+.color_white {
+  color: white;
+}

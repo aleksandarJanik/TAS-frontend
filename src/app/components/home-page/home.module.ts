@@ -5,9 +5,17 @@ import { HomePageComponent } from './home-page.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartComponent } from '../chart/chart.component';
+import { NotesComponent } from '../notes/notes.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-  declarations: [HomePageComponent, ChartComponent],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, NgChartsModule],
+  declarations: [HomePageComponent, ChartComponent, NotesComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    HomeRoutingModule,
+    NgChartsModule,
+    AngularEditorModule,
+  ],
 })
 export class HomeModule {}

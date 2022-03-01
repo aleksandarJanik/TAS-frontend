@@ -41,6 +41,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'test/:id',
+    loadChildren: () =>
+      import('./components/create-test-page/create-test.module').then(
+        (m) => m.CreateTestModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'settings',
     loadChildren: () =>
       import('./components/settings-page/settings.module').then(

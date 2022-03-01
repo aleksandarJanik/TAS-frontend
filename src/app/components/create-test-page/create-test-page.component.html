@@ -1,0 +1,27 @@
+<div class="card-header">
+  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;">Create New Quiz</span></h1>
+</div>
+
+<div class="container-fluid" style="background: rgb(240, 235, 248);padding-bottom: 5rem;" *ngIf="exam">
+  <div id="wrapper" style="width: 80%; margin: 0 auto; ">
+    <br>
+    <div id="title_box">
+        <mat-form-field class="example-full-width" appearance="fill" >
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name"   autocomplete="off" [(ngModel)]="exam.name" (focusout)="saveTitle()">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill" >
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="" [(ngModel)]="description" (focusout)="saveDescription()" ></textarea>
+        </mat-form-field>
+    </div>
+    <br>
+        <app-question *ngFor="let question of questions; let i = index" [question]="question" [index]="i" [examId]="exam._id" (questionEdited)="questionEdited()" ></app-question>
+    <br>
+    <div id="add_question_div">
+      <button (click)="addQuestion()">Add question</button>
+    </div>
+
+  </div>
+
+</div>

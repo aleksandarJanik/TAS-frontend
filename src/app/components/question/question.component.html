@@ -1,0 +1,94 @@
+<div class="question" *ngIf="question">
+  <div style="width: 100%; display: flex; padding: 1rem; height: 7rem;">
+    <div style="width: 55%;">
+      <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+        <mat-label>Question</mat-label>
+        <input matInput placeholder="Question" [(ngModel)]="question.question" autocomplete="off">
+      </mat-form-field>
+    </div>
+    <div style="width: 45%; text-align: right;">
+      <mat-form-field appearance="fill" >
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required [(ngModel)]="question.type">
+          <option value="{{typeQuestion.DROPDOWN}}">Dropdown</option>
+          <option value="{{typeQuestion.SHORT_ANSWER}}">Short answer</option>
+          <option value="{{typeQuestion.RADIO}}">Single choice</option>
+          <option value="{{typeQuestion.CHECKBOXES}}">Checkboxes</option>
+
+        </select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="answers">
+    <!-- Short answer -->
+    <div class="short_answer" style="text-align: center; min-height: 6rem;" *ngIf="question.type+'' === typeQuestion.SHORT_ANSWER+''">
+      <div *ngFor="let answer of question.answers;  let i = index;" style="width: 100%;">
+              <div style="display: flex; align-items: center;">
+                <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                  <mat-label>Short answer text</mat-label>
+                  <input matInput  [(ngModel)]="questionHashHelper[i].name">
+                </mat-form-field>
+                <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswer(i)">remove_circle</mat-icon>
+              </div>
+                <br>
+      </div>
+                  <button style="margin:  0 auto;" (click)="addOption()" mat-button>Add more...</button>
+      </div>
+    <!-- Radio -->
+    <div class="radio dropdown" style="text-align: center; min-height: 6rem;" *ngIf="question.type+'' === typeQuestion.DROPDOWN+'' || question.type+'' === typeQuestion.RADIO+'' ">
+
+        <mat-radio-group [(ngModel)]="correctRadioAnswer" style="width: 100%;">
+          <div *ngFor="let answer of question.answers; let i = index" style="width: 100%; display: flex; align-items: center;">
+
+            <mat-radio-button style="margin-right: 0.3rem;" [checked]="false"  value="{{questionHashHelper[i].randomString}}" (change)="radioChange(i)"></mat-radio-button>
+            <mat-form-field class="example-full-width" appearance="fill" style="width: 80%;">
+              <mat-label >Option</mat-label>
+              <input matInput [(ngModel)]="questionHashHelper[i].name">
+            </mat-form-field>
+            <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswerRadio(i, answer, questionHashHelper[i])">remove_circle</mat-icon>
+          </div>
+        </mat-radio-group>
+
+
+      <button mat-button (click)="addOption()">Add more...</button>
+    </div>
+    <!-- Checkbox -->
+    <div class="checkbox" style="text-align: center; min-height: 6rem;" *ngIf="question.type+'' === typeQuestion.CHECKBOXES+''">
+
+                <section>
+                  <div *ngFor="let answer of question.answers;  let i = index" style="width: 100%; display: flex; align-items: center;" >
+                      <mat-checkbox  [(ngModel)]="questionHashHelper[i].correct"  style="margin-right: 0.3rem;"></mat-checkbox>
+                    <mat-form-field class="example-full-width" appearance="fill" style="width: 80%;">
+                      <mat-label>Option</mat-label>
+                      <input matInput [(ngModel)]="questionHashHelper[i].name">
+                    </mat-form-field>
+                    <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswer(i)">remove_circle</mat-icon>
+                  </div>
+                </section>
+
+              <button  mat-button (click)="addOption()">Add more...</button>
+      </div>
+
+  </div>
+  <div class="more_options" style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="cursor: pointer; display: inline-block; margin-right: 1rem;margin-left: 0.5rem; background: #ff4081; color: white; padding: 0.1rem;" (click)="saveQuestion()" matTooltip="Save">
+      <mat-icon>save</mat-icon>
+    </div>
+    <div style="cursor: pointer; display: inline-block; margin-right: 1rem;margin-left: 0.5rem;" matTooltip="Duplicate">
+      <mat-icon>filter</mat-icon>
+    </div>
+
+    <div style="cursor: pointer; display: inline-block; margin-right: 1rem;margin-left: 0.5rem;" matTooltip="Delete" (click)="removeQuestion()">
+      <mat-icon>delete</mat-icon>
+    </div>
+
+    <div style="cursor: pointer; display: inline-block; border-left: 1px solid #dadce0; padding-left: 1rem;">
+
+      <mat-slide-toggle [(ngModel)]="question.isRequired">Required</mat-slide-toggle>
+    </div>
+  </div>
+</div>
+{{questionHashHelper | json}}
+<br>
+{{correctRadioAnswer}}

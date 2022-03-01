@@ -1,0 +1,16 @@
+<h2 mat-dialog-title style="text-align: center;">Create New Note</h2>
+
+<mat-dialog-content class="mat-typography">
+
+
+  <div class="example-full-width" appearance="fill">
+    <label for="name" class="required">Activity:</label>
+    <input type="text" class="form-control" name="activity" autocomplete="off"  [(ngModel)]="noteKey" placeholder="Enter the note key">
+  </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial class="btn btn-success" type="submit" (click)="createNote()">Create</button>
+</mat-dialog-actions>

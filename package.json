@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@auth0/angular-jwt": "^5.0.2",
+    "@kolkov/angular-editor": "^2.0.0",
     "@ngxs/devtools-plugin": "^3.7.3",
     "@ngxs/logger-plugin": "^3.7.3-dev.master-5175b98",
     "@ngxs/store": "^3.7.3",
