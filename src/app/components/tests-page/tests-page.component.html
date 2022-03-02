@@ -9,5 +9,11 @@
   <div style="padding:1rem;background:#3f51b5; color: white;">Exams</div>
   <div *ngFor="let exam of exams" style="border: solid rgb(220, 217, 217) 1px; padding: 1rem;">
     <a routerLink="/test/{{exam._id}}">{{exam.name}}</a>
+    <div style="float: right;display: flex;align-items: center;height: 1.3rem;" class="wrapper_buttons">
+      <button mat-stroked-button color="primary"><mat-icon>remove_red_eye</mat-icon><span>Preview</span></button>
+      <button mat-stroked-button color="primary"><mat-icon>settings</mat-icon> <span>Cofigure</span></button>
+      <button mat-stroked-button color="accent"><mat-icon> publish</mat-icon> <span>Publish</span></button>
+      <button mat-stroked-button color="primary"><mat-icon> table_chart</mat-icon> <span>Analyze</span></button>
+    </div>
   </div>
 </div>

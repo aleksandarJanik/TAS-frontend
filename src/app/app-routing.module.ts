@@ -49,6 +49,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'preview/:id',
+    loadChildren: () =>
+      import('./components/preview-quiz-page/preview-quiz.module').then(
+        (m) => m.PreviewQuizModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'settings',
     loadChildren: () =>
       import('./components/settings-page/settings.module').then(

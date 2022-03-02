@@ -1,0 +1,36 @@
+<div class="card-header">
+  <div style="position: absolute;">
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: 1px dotted;">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/test/{{exam._id}}" *ngIf="exam">
+        <mat-icon >create</mat-icon>
+        <span>Create</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Cofigure</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon> publish</mat-icon>
+        <span>Publish</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon> table_chart</mat-icon>
+        <span>Analyze</span>
+      </button>
+    </mat-menu>
+  </div>
+  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;" *ngIf="exam">Preview {{exam.name}}</span></h1>
+</div>
+<div class="container-fluid" style="background:  #f2f2f2;padding-bottom: 10rem;" *ngIf="exam">
+  <div id="wrapper" style="width: 70%; margin: 0 auto; padding-top: 3rem; background: white; height: 100%;">
+    <div *ngFor="let question of exam.questions">
+      <app-show-question [question]="question"></app-show-question>
+
+    </div>
+    <div style=" height: 4rem; display: flex; align-items: center; justify-content: center;"><button mat-raised-button color="primary" >Submit</button></div>
+  </div>
+
+</div>

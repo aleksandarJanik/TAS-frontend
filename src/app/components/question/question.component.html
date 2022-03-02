@@ -23,11 +23,11 @@
   <div class="answers">
     <!-- Short answer -->
     <div class="short_answer" style="text-align: center; min-height: 6rem;" *ngIf="question.type+'' === typeQuestion.SHORT_ANSWER+''">
-      <div *ngFor="let answer of question.answers;  let i = index;" style="width: 100%;">
+      <div *ngFor="let answer of answers;  let i = index;" style="width: 100%;">
               <div style="display: flex; align-items: center;">
                 <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
                   <mat-label>Short answer text</mat-label>
-                  <input matInput  [(ngModel)]="questionHashHelper[i].name">
+                  <input matInput  [(ngModel)]="answers[i].val">
                 </mat-form-field>
                 <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswer(i)">remove_circle</mat-icon>
               </div>
@@ -38,15 +38,15 @@
     <!-- Radio -->
     <div class="radio dropdown" style="text-align: center; min-height: 6rem;" *ngIf="question.type+'' === typeQuestion.DROPDOWN+'' || question.type+'' === typeQuestion.RADIO+'' ">
 
-        <mat-radio-group [(ngModel)]="correctRadioAnswer" style="width: 100%;">
-          <div *ngFor="let answer of question.answers; let i = index" style="width: 100%; display: flex; align-items: center;">
+        <mat-radio-group  style="width: 100%;">
+          <div *ngFor="let answer of answers; let i = index" style="width: 100%; display: flex; align-items: center;">
 
-            <mat-radio-button style="margin-right: 0.3rem;" [checked]="false"  value="{{questionHashHelper[i].randomString}}" (change)="radioChange(i)"></mat-radio-button>
+            <mat-radio-button style="margin-right: 0.3rem;" [value]="answers[i].id" [checked]="answer.radio === true"   (change)="radioChange(i)"></mat-radio-button>
             <mat-form-field class="example-full-width" appearance="fill" style="width: 80%;">
               <mat-label >Option</mat-label>
-              <input matInput [(ngModel)]="questionHashHelper[i].name">
+              <input matInput [(ngModel)]="answers[i].val">
             </mat-form-field>
-            <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswerRadio(i, answer, questionHashHelper[i])">remove_circle</mat-icon>
+            <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswer(i)">remove_circle</mat-icon>
           </div>
         </mat-radio-group>
 
@@ -57,11 +57,11 @@
     <div class="checkbox" style="text-align: center; min-height: 6rem;" *ngIf="question.type+'' === typeQuestion.CHECKBOXES+''">
 
                 <section>
-                  <div *ngFor="let answer of question.answers;  let i = index" style="width: 100%; display: flex; align-items: center;" >
-                      <mat-checkbox  [(ngModel)]="questionHashHelper[i].correct"  style="margin-right: 0.3rem;"></mat-checkbox>
+                  <div *ngFor="let answer of answers;  let i = index" style="width: 100%; display: flex; align-items: center;" >
+                      <mat-checkbox  [(ngModel)]="answers[i].checked"  style="margin-right: 0.3rem;"></mat-checkbox>
                     <mat-form-field class="example-full-width" appearance="fill" style="width: 80%;">
                       <mat-label>Option</mat-label>
-                      <input matInput [(ngModel)]="questionHashHelper[i].name">
+                      <input matInput [(ngModel)]="answers[i].val">
                     </mat-form-field>
                     <mat-icon style="cursor: pointer; color: #ff4081; margin-bottom: 2rem; font-size: 2.5rem;" (click)="removeAnswer(i)">remove_circle</mat-icon>
                   </div>
@@ -89,6 +89,5 @@
     </div>
   </div>
 </div>
-{{questionHashHelper | json}}
 <br>
-{{correctRadioAnswer}}
+

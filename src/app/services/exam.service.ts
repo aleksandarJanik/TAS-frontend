@@ -81,4 +81,18 @@ export class ExamService {
     );
     return question;
   }
+
+  async saveQuestion(
+    questionCreateDto: QuestionCreateDto,
+    examId: string,
+    questionId: string
+  ) {
+    let question = await lastValueFrom(
+      this.http.put<Exam>(
+        `${AppConstants.API_URL}/exam/${examId}/question/${questionId}`,
+        questionCreateDto
+      )
+    );
+    return question;
+  }
 }

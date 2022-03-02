@@ -1,0 +1,29 @@
+<div id="wapperQuestion" style="padding: 2rem;" *ngIf="question">
+  <h3>{{question.question}}</h3>
+  <div style="padding: 0.5rem;">
+    <mat-radio-group *ngIf="question.type+'' === typeQuestion.RADIO+''">
+    <div *ngFor="let a of answers" style="margin-bottom: 0.5rem;">
+      <mat-radio-button [value]="a">{{a.name}}</mat-radio-button>
+    </div>
+    </mat-radio-group>
+
+    <section class="example-section" *ngIf="question.type+'' === typeQuestion.CHECKBOXES+''">
+      <div *ngFor="let a of answers" style="margin-bottom: 0.5rem;">
+        <mat-checkbox >{{a.name}}</mat-checkbox>
+      </div>
+    </section>
+
+    <mat-form-field appearance="fill" *ngIf="question.type+'' === typeQuestion.DROPDOWN+''">
+      <mat-select>
+        <mat-option *ngFor="let a of answers" [value]="a.name">
+          {{a.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill" *ngIf="question.type+'' === typeQuestion.SHORT_ANSWER+''">
+        <input matInput placeholder="Your answer here" >
+      </mat-form-field>
+  </div>
+</div>
+<hr>
