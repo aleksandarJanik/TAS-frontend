@@ -14,6 +14,9 @@ import Swal from 'sweetalert2';
 import { AddActivityComponent } from '../add-activity/add-activity.component';
 import { EditStudentComponent } from '../edit-student/edit-student.component';
 import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
+import { SelectTestModalComponent } from '../select-test-modal/select-test-modal.component';
+import { ExamService } from 'src/app/services/exam.service';
+import { Exam } from 'src/app/models/exam.model';
 
 @Component({
   selector: 'app-class-details-page',
@@ -24,7 +27,7 @@ export class ClassDetailsPageComponent implements OnInit {
   students: Student[] = [];
   classId: any;
   classFromDb: Class;
-
+  exams: Exam[] = [];
   public displayedColumns: string[] = [
     'select',
     'student',
@@ -35,6 +38,7 @@ export class ClassDetailsPageComponent implements OnInit {
   public dataSource: MatTableDataSource<Student>;
   public selection = new SelectionModel<Student>(true, []);
   public isShowFilterInput = false;
+  showSendExamBtn = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
@@ -43,7 +47,8 @@ export class ClassDetailsPageComponent implements OnInit {
     private route: ActivatedRoute,
     private classService: ClassService,
     public dialog: MatDialog,
-    router: Router
+    router: Router,
+    private examService: ExamService
   ) {}
 
   async ngOnInit() {
@@ -51,6 +56,12 @@ export class ClassDetailsPageComponent implements OnInit {
     this.classId = this.route.snapshot.paramMap.get('id');
     this.classFromDb = await this.classService.getClassById(this.classId);
     await this.getStudents();
+    this.exams = await this.examService.getExams();
+    this.exams = this.exams.filter((e) => e.questions.length > 0);
+    if (this.exams.length > 0) {
+      this.showSendExamBtn = true;
+    }
+    // console.log('exams: ', this.exams);
   }
 
   public applyFilter(event: Event): void {
@@ -175,5 +186,22 @@ export class ClassDetailsPageComponent implements OnInit {
     // console.log(arrToExport);
 
     new AngularCsv(arrToExport, `Class_${this.classFromDb.name}`, options);
+  }
+
+  async openModalToSendQuiz() {
+    console.log(this.students);
+    let presentStudents = await this.students.filter(
+      (s) => s.isPresent === true
+    );
+    let dialogRef = this.dialog.open(SelectTestModalComponent, {
+      height: '315px',
+      width: '400px',
+      data: { exams: this.exams, presentStudents, classId: this.classId },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.data === 'confirmed') {
+        this.getStudents();
+      }
+    });
   }
 }

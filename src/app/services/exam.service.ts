@@ -7,6 +7,7 @@ import {
   ExamDto,
   QuestionCreateDto,
   QuestionViewDto,
+  UpdateSettingsExamDto,
 } from '../models/exam.model';
 import { AppConstants } from '../shared/constants';
 
@@ -40,6 +41,13 @@ export class ExamService {
   async getExams(): Promise<Exam[]> {
     let exam = await lastValueFrom(
       this.http.get<Exam[]>(`${AppConstants.API_URL}/exam`)
+    );
+    return exam;
+  }
+
+  async removeExam(examId: string) {
+    let exam = await lastValueFrom(
+      this.http.delete<Exam>(`${AppConstants.API_URL}/exam/${examId}`)
     );
     return exam;
   }
@@ -94,5 +102,18 @@ export class ExamService {
       )
     );
     return question;
+  }
+
+  async saveSettings(
+    updateSettingsExamDto: UpdateSettingsExamDto,
+    examId: string
+  ) {
+    let exam = await lastValueFrom(
+      this.http.put<Exam>(
+        `${AppConstants.API_URL}/exam/${examId}/settings`,
+        updateSettingsExamDto
+      )
+    );
+    return exam;
   }
 }

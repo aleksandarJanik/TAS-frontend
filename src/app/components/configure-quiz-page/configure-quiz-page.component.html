@@ -1,0 +1,103 @@
+<div class="card-header">
+  <div style="position: absolute;" *ngIf="exam">
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: 1px dotted;">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/test/{{exam._id}}">
+        <mat-icon>create</mat-icon>
+        <span>Create</span>
+      </button>
+      <button mat-menu-item (click)="goToPreview()" *ngIf="exam">
+        <mat-icon>remove_red_eye</mat-icon>
+        <span>Preview</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon> publish</mat-icon>
+        <span>Publish</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon> table_chart</mat-icon>
+        <span>Analyze</span>
+      </button>
+    </mat-menu>
+  </div>
+  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;" *ngIf="exam">Configure <b>{{exam.name}}</b></span></h1>
+</div>
+<div class="container-fluid" style="background:  #f2f2f2; padding-bottom: 10rem;" *ngIf="exam">
+  <div id="wrapper" style="width: 60%; margin: 0 auto; padding-top: 3rem;  ">
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Time limit</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-checkbox class="" style="position: relative; top: 2px;margin-right: 1rem;" [(ngModel)]="exam.hasTimeLimit"></mat-checkbox>
+          <input [(ngModel)]="exam.time" (focusout)="isCorrect()" [disabled]="!exam.hasTimeLimit" matInput placeholder="mm:ss" style="width: 4rem;" >
+        </div>
+
+      </div>
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Show results page</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-checkbox class="" style="position: relative; top: 2px;margin-right: 1rem;" [(ngModel)]="exam.showResutPage"></mat-checkbox>
+        </div>
+
+      </div>
+
+      <!-- <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Show answers during quiz</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-checkbox class="" style="position: relative; top: 2px;margin-right: 1rem;"></mat-checkbox>
+        </div>
+
+      </div> -->
+
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Grade 1</b></div>
+        <div style="width:50%; margin-left: 10px;">
+              <mat-slider   [max]="exam.grade2-1" min="1" step="1" [(ngModel)]="exam.grade1" >
+              </mat-slider>
+              <label class="example-value-label">{{exam.grade1}}%</label>
+        </div>
+
+      </div>
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Grade 2</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-slider [max]="exam.grade3" [min]="exam.grade1" step="1" [(ngModel)]="exam.grade2">
+          </mat-slider>
+          <label class="example-value-label">{{exam.grade2}}%</label>
+        </div>
+
+      </div>
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Grade 3</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-slider [max]="exam.grade4" [min]="exam.grade2" step="1" [(ngModel)]="exam.grade3">
+          </mat-slider>
+          <label class="example-value-label">{{exam.grade3}}%</label>
+        </div>
+
+      </div>
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Grade 4</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-slider [max]="exam.grade5" [min]="exam.grade3" step="1" [(ngModel)]="exam.grade4">
+          </mat-slider>
+          <label class="example-value-label">{{exam.grade4}}%</label>
+        </div>
+
+      </div>
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; height: 7rem;">
+        <div style="width:50%; font-size: 1.2rem; text-align: right;"><b>Grade 5</b></div>
+        <div style="width:50%; margin-left: 10px;">
+          <mat-slider [max]="100" [min]="exam.grade4" step="1" [(ngModel)]="exam.grade5">
+          </mat-slider>
+          <label class="example-value-label">{{exam.grade5}}%</label>
+        </div>
+
+      </div>
+  </div>
+  <div id="add_question_div">
+    <button (click)="save()">Save</button>
+  </div>
+
+</div>

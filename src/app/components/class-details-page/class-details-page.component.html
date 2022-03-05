@@ -12,69 +12,7 @@
 
 
 
-    <!-- <div class="container-fluid  mt-3">
-      <div class="row bg-dark" style="color:white;">
-        <div class="col-1 center-XY   p-0" style="border-right: 1px solid white;">
-          <div class="threeDots">Present in class</div>
-        </div>
-        <div class="col-3 center-XY" style="border-right: 1px solid white;">Name/Surname</div>
-        <div class="col-5 center-XY p-0" style="border-right: 1px solid white;">Аctivities</div>
-        <div class="col-2 center-XY p-0" style="border-right: 1px solid white;">email</div>
-        <div class="col-1 center-XY p-0"> # </div>
 
-      </div>
-      <div class="row alternating-staining list-group-item p-0 " *ngFor="let student of students" style="color:black; display: flex;">
-        <div class="col-1 border_right center-XY">
-          <input type="checkbox" [(ngModel)]="student.isPresent" (change)="checkValue(student)" />
-        </div>
-        <div class="col-3 border_right center-XY">
-          <span class="threeDots"><b>{{student.firstName}} {{student.lastName}}</b></span>
-        </div>
-        <div class="col-5 border_right center-XY threeDots" style="justify-content: left; ">
-          <button class="btn btn-tool " type="button" data-toggle="modal" data-target="#addActivityModal"  (click)="openModalToAddActivity(student)"><i class="bi bi-plus-circle-fill" style="color: #28a745;"></i></button>
-          <span *ngFor="let a of student.activities"><span *ngIf="a.name !== 'activity'">{{a.name}}</span> {{a.grade}}, &nbsp;</span>
-        </div>
-        <div class="col-2 border_right center-XY" style="justify-content: left;">
-          {{student.email}}
-        </div>
-        <div class="col-1 center-XY p-0">
-          <div class="col-6 center-XY p-0">
-            <button style="font-size: 16px; color:#17a2b8 !important;" (click)="openModalToEdit(student)"  data-toggle="modal" data-backdrop="static" data-target="#editStudentModal"  type="button" class="btn btn-tool btnToOpenModalSudent p-0"><i class="bi bi-binoculars-fill"></i></button>
-          </div>
-          <div class="col-6 center-XY p-0">
-            <button style="font-size: 16px; color:#dc3545;" class="btn btn-tool removeStudent p-0" (click)="revmoveStudent(student._id)"><i class="bi bi-x-circle-fill"></i></button>
-          </div>
-      </div>
-      </div>
-    </div> -->
-
-
-
-
-
-
-<!--
-  <div class="modal fade"  id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-  <app-add-activity *ngIf="studentToAddActivity" [studentToAddActivity]="studentToAddActivity" (addActivityEmmiter)="getStudents()" [classId]="classId"></app-add-activity>
-  </div>
-
-
-<div class="modal fade bd-example-modal-lg"  id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">Edit student</h2>
-        <button type="button" #closeModal class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <app-edit-student *ngIf="studentToEdit" [student]="studentToEdit" [classId]="classId" (addStudentEmmiter)="getStudents()" (closeModal)="modalClose()"></app-edit-student>
-
-    </div>
-  </div>
-</div> -->
 
 
 <mat-card class="employee-table-wrapper">
@@ -94,7 +32,8 @@
     </button>
 
   </mat-card-title>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInCsv()" color="accent">Export</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInCsv()" color="primary">Export</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button *ngIf="showSendExamBtn" (click)="openModalToSendQuiz()"  color="accent" matTooltip="The test will be sent to all present students in the class">Evaluate them</button>
   <mat-card-content class="employee-table__content">
     <table class="employee-table__table" *ngIf="dataSource" mat-table [dataSource]="dataSource">
 

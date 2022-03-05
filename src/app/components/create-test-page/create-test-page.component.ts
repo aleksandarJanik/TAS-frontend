@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Exam,
   QuestionCreateDto,
@@ -7,6 +7,7 @@ import {
   TypeQuestion,
 } from 'src/app/models/exam.model';
 import { ExamService } from 'src/app/services/exam.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-test-page',
@@ -20,7 +21,8 @@ export class CreateTestPageComponent implements OnInit {
   description = '';
   constructor(
     private route: ActivatedRoute,
-    private examService: ExamService
+    private examService: ExamService,
+    private _router: Router
   ) {}
 
   async ngOnInit() {
@@ -39,9 +41,11 @@ export class CreateTestPageComponent implements OnInit {
       type: TypeQuestion.DROPDOWN,
       isRequired: true,
     };
-    let exam = await this.examService.addQuestion(question, this.exam._id);
-    this.exam = exam;
-    this.questions = this.exam.questions;
+    try {
+      let exam = await this.examService.addQuestion(question, this.exam._id);
+      this.exam = exam;
+      this.questions = this.exam.questions;
+    } catch (e) {}
   }
 
   async saveDescription() {
@@ -60,5 +64,21 @@ export class CreateTestPageComponent implements OnInit {
   async questionEdited() {
     this.exam = await this.examService.getExamById(this.exam._id);
     this.questions = this.exam.questions;
+  }
+  goToPreview() {
+    if (this.exam.questions.length > 0) {
+      this._router.navigate([`/preview/${this.exam._id}`]);
+    } else {
+      Swal.fire({
+        icon: 'info', //"success" | "error" | "warning" | "info" | "question"
+        title: 'Add question!',
+        text: 'Please add at least one question for previewing the quiz!',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+        backdrop: false,
+        // timer: 1000,
+        // footer: '',
+      });
+    }
   }
 }

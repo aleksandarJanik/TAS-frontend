@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   QuestionCreateDto,
   QuestionViewDto,
@@ -21,7 +22,10 @@ export class QuestionComponent implements OnInit {
   // questionHashHelper: any = {};
   // correctRadioAnswer: string;
   answers: any = [];
-  constructor(private examService: ExamService) {}
+  constructor(
+    private examService: ExamService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   async ngOnInit() {
     console.log('question: ', this.question);
@@ -53,6 +57,9 @@ export class QuestionComponent implements OnInit {
     try {
       await this.examService.removeQuestion(this.examId, this.question._id);
       this.questionEdited.emit();
+      this._snackBar.open('Question removed successfully!', 'close', {
+        duration: 1500,
+      });
     } catch (e) {}
   }
   addOption() {
@@ -94,11 +101,16 @@ export class QuestionComponent implements OnInit {
       correctAnswers: correctAnswers,
     };
     console.log(updateQuestionDto);
-    await this.examService.saveQuestion(
-      updateQuestionDto,
-      this.examId,
-      this.question._id
-    );
+    try {
+      await this.examService.saveQuestion(
+        updateQuestionDto,
+        this.examId,
+        this.question._id
+      );
+      this._snackBar.open('Question saved successfully!', 'close', {
+        duration: 1500,
+      });
+    } catch (e) {}
   }
 
   removeAnswer(index: number) {
@@ -110,5 +122,22 @@ export class QuestionComponent implements OnInit {
       a.radio = false;
     }
     this.answers[index].radio = true;
+  }
+
+  async duplicate() {
+    let question: QuestionCreateDto = {
+      answers: this.question.answers ? this.question.answers : [],
+      correctAnswers: this.question.answers ? this.question.answers : [],
+      question: this.question.question ? this.question.question : '',
+      type: this.question.type,
+      isRequired: this.question.isRequired,
+    };
+    try {
+      let exam = await this.examService.addQuestion(question, this.examId);
+      this.questionEdited.emit();
+      this._snackBar.open('Question duplicate successfully!', 'close', {
+        duration: 1500,
+      });
+    } catch (e) {}
   }
 }

@@ -1,14 +1,14 @@
 <div class="card-header">
-  <div style="position: absolute;">
+  <div style="position: absolute;" *ngIf="exam">
     <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: 1px dotted;">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/test/{{exam._id}}" *ngIf="exam">
+      <button mat-menu-item routerLink="/test/{{exam._id}}" >
         <mat-icon >create</mat-icon>
         <span>Create</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item routerLink="/configure/{{exam._id}}">
         <mat-icon>settings</mat-icon>
         <span>Cofigure</span>
       </button>
@@ -22,7 +22,7 @@
       </button>
     </mat-menu>
   </div>
-  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;" *ngIf="exam">Preview {{exam.name}}</span></h1>
+  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;" *ngIf="exam">Preview <b>{{exam.name}}</b></span></h1>
 </div>
 <div class="container-fluid" style="background:  #f2f2f2;padding-bottom: 10rem;" *ngIf="exam">
   <div id="wrapper" style="width: 70%; margin: 0 auto; padding-top: 3rem; background: white; height: 100%;">

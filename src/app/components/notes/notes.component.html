@@ -5,8 +5,9 @@
 
       <mat-card style="padding: 0px;" >
           <div id="panel" style="display: flex; justify-content: right; align-items: center;" [style.background]="note.color? note.color : 'rgb(63, 81, 181)'">
-
+              <span style="width: 100%; text-align: left; padding-left: 1rem; color: white;">{{note.key}}</span>
               <span class="button" >
+
                 <button class="" [style.background]="note.color " mat-menu-item   [matMenuTriggerFor]="settings" >
                   <mat-icon class="color_white"> format_color_fill</mat-icon>
                 </button>

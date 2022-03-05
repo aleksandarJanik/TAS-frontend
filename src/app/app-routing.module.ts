@@ -65,6 +65,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'configure/:id',
+    loadChildren: () =>
+      import('./components/configure-quiz-page/configure-quiz.module').then(
+        (m) => m.ConfigureQuizModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'class/:id',
     loadChildren: () =>
       import('./components/class-details-page/class-details.module').then(

@@ -3,12 +3,12 @@
     <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: 1px dotted; ">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/preview/{{exam._id}}" *ngIf="exam">
+    <mat-menu #menu="matMenu" >
+      <button mat-menu-item  (click)="goToPreview()" >
         <mat-icon>remove_red_eye</mat-icon>
         <span>Preview</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item routerLink="/configure/{{exam._id}}" *ngIf="exam">
         <mat-icon>settings</mat-icon>
         <span>Cofigure</span>
       </button>
@@ -22,7 +22,7 @@
       </button>
     </mat-menu>
   </div>
-  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;">Manage Quiz</span></h1>
+  <h1 *ngIf="exam" class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;">Manage Quiz <b>{{exam.name}}</b></span></h1>
 </div>
 
 <div class="container-fluid" style="background: rgb(240, 235, 248);padding-bottom: 5rem;" *ngIf="exam">

@@ -1,0 +1,22 @@
+<h2 mat-dialog-title style="text-align: center;">Choose a quiz</h2>
+
+<mat-dialog-content class="mat-typography" align="center" style="height: 50%;">
+
+
+<mat-form-field appearance="fill" >
+  <mat-label>Cars</mat-label>
+  <select matNativeControl required>
+    <option *ngFor="let exam of exams" value="{{exam._id}}">{{exam.name}}</option>
+  </select>
+</mat-form-field>
+
+
+
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button  mat-raised-button color="accent" (click)="sentQuiz()">SendQuiz</button>
+</mat-dialog-actions>

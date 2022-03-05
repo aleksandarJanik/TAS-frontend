@@ -19,6 +19,40 @@ export class Exam {
   createdAt: Date;
 
   updatedAt: Date;
+
+  grade1: number;
+
+  grade2: number;
+
+  grade3: number;
+
+  grade4: number;
+
+  grade5: number;
+
+  time: string;
+
+  hasTimeLimit: boolean;
+
+  showResutPage: boolean;
+}
+
+export class UpdateSettingsExamDto {
+  grade1: number;
+
+  grade2: number;
+
+  grade3: number;
+
+  grade4: number;
+
+  grade5: number;
+
+  time: string;
+
+  hasTimeLimit: boolean;
+
+  showResutPage: boolean;
 }
 
 export class QuestionViewDto {

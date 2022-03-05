@@ -21,6 +21,7 @@ import { ShortNamePipe } from './shared/pipes/short-name';
 import { EditActivityComponent } from './components/edit-activity/edit-activity.component';
 import { CreateNoteModalComponent } from './components/create-note-modal/create-note-modal.component';
 import { CreateTestModalComponent } from './components/create-test-modal/create-test-modal.component';
+import { SelectTestModalComponent } from './components/select-test-modal/select-test-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CreateTestModalComponent } from './components/create-test-modal/create-
     EditActivityComponent,
     CreateNoteModalComponent,
     CreateTestModalComponent,
+    SelectTestModalComponent,
   ],
   imports: [
     BrowserModule,
