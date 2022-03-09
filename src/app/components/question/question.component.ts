@@ -97,10 +97,11 @@ export class QuestionComponent implements OnInit {
       isRequired: this.question.isRequired,
       type: parseInt(this.question.type + ''),
       question: this.question.question,
-      answers: answ,
-      correctAnswers: correctAnswers,
+      answers: [...new Set(answ)],
+      correctAnswers: [...new Set(correctAnswers)],
     };
-    console.log(updateQuestionDto);
+    // console.log(updateQuestionDto);
+
     try {
       await this.examService.saveQuestion(
         updateQuestionDto,

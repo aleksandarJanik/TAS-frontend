@@ -7,10 +7,9 @@ import { NotesComponent } from '../notes/notes.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { PreviewQuizPageComponent } from './preview-quiz-page.component';
 import { PreviewQuizRoutingModule } from './preview-quiz-routing.module';
-import { ShowQuestionComponent } from '../show-question/show-question.component';
 
 @NgModule({
-  declarations: [PreviewQuizPageComponent, ShowQuestionComponent],
+  declarations: [PreviewQuizPageComponent],
   imports: [CommonModule, SharedModule, PreviewQuizRoutingModule],
 })
 export class PreviewQuizModule {}

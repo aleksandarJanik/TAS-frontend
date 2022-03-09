@@ -5,10 +5,16 @@ import { Class, ClassDto, ClassWithStats } from '../models/class.model';
 import {
   Exam,
   ExamDto,
+  FinishedExamDto,
   QuestionCreateDto,
   QuestionViewDto,
   UpdateSettingsExamDto,
 } from '../models/exam.model';
+import {
+  SaveTimeDto,
+  StudentSpecialToken,
+  StudentSpecialTokenDto,
+} from '../models/specialTokenStudent.model';
 import { AppConstants } from '../shared/constants';
 
 @Injectable({
@@ -34,6 +40,15 @@ export class ExamService {
   async getExamById(examId: any): Promise<Exam> {
     let exam = await lastValueFrom(
       this.http.get<Exam>(`${AppConstants.API_URL}/exam/${examId}`)
+    );
+    return exam;
+  }
+
+  async getExamToStartQuiz(examId: any, userId: any): Promise<Exam> {
+    let exam = await lastValueFrom(
+      this.http.get<Exam>(
+        `${AppConstants.API_URL}/exam/${examId}/teacher/${userId}`
+      )
     );
     return exam;
   }
@@ -115,5 +130,44 @@ export class ExamService {
       )
     );
     return exam;
+  }
+
+  async sendQuiz(studentSpecialTokenDto: StudentSpecialTokenDto[]) {
+    let tokens = await lastValueFrom(
+      this.http.post<StudentSpecialToken>(
+        `${AppConstants.API_URL}/student-special-token`,
+        studentSpecialTokenDto
+      )
+    );
+    return tokens;
+  }
+
+  async checkToken(token: string) {
+    let tokenFromDb = await lastValueFrom(
+      this.http.get<StudentSpecialToken>(
+        `${AppConstants.API_URL}/student-special-token/${token}`
+      )
+    );
+    return tokenFromDb;
+  }
+
+  async saveTime(saveTimeDto: SaveTimeDto) {
+    let tokenFromDb = await lastValueFrom(
+      this.http.post<SaveTimeDto>(
+        `${AppConstants.API_URL}/student-special-token/save-time`,
+        saveTimeDto
+      )
+    );
+    return tokenFromDb;
+  }
+
+  async finishExam(finishedExamDto: FinishedExamDto) {
+    let tokenFromDb = await lastValueFrom(
+      this.http.post<SaveTimeDto>(
+        `${AppConstants.API_URL}/student-special-token/finished-exam`,
+        finishedExamDto
+      )
+    );
+    return tokenFromDb;
   }
 }

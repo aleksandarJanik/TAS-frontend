@@ -4,8 +4,8 @@
 
 
 <mat-form-field appearance="fill" >
-  <mat-label>Cars</mat-label>
-  <select matNativeControl required>
+  <mat-label>Exam</mat-label>
+  <select matNativeControl required [(ngModel)]="choosenExamId">
     <option *ngFor="let exam of exams" value="{{exam._id}}">{{exam.name}}</option>
   </select>
 </mat-form-field>

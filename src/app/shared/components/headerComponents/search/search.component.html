@@ -2,7 +2,7 @@
   <mat-icon class="search-icon" [ngClass]="{'open-search': isShowInput}">search</mat-icon>
   <input *ngIf="isShowInput" (keyup)="getData()" [(ngModel)]="searchValue" class="search-input" autocomplete="off" [matAutocomplete]="auto"   placeholder="Search...">
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChange($event)">
-    <mat-option *ngFor="let option of filteredClasses" [value]="option">
+    <mat-option *ngFor="let option of filteredSearchThings" [value]="option">
       {{option.name}}
     </mat-option>
   </mat-autocomplete>

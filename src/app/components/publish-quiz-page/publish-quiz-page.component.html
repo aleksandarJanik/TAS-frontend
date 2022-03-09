@@ -1,0 +1,17 @@
+<div class="container-fluid" style="background:  #f2f2f2;padding-bottom: 10rem;" *ngIf="exam">
+
+  <div id="wrapper" style="width: 70%; margin: 0 auto;  background: white; height: 100%;">
+    <div style="background: #3f51b5 ; padding: 1rem; color: white;padding: 1rem;">
+      <h1 style="text-align: center;">{{exam.name}} </h1>
+      <div style="text-align: center;">{{exam.description}}</div>
+      <div *ngIf="exam.hasTimeLimit"><span>Time remaining: </span><countdown #cd [config]="config" (event)="handleEvent($event)"></countdown></div>
+    </div>
+    <div *ngFor="let question of exam.questions; let i = index">
+      <app-show-question [question]="question" [num]="i+1" (qustionClear)="qustionClear($event)" (answerAdded)="addAnswer($event)"></app-show-question>
+
+    </div>
+    <div style=" height: 4rem; display: flex; align-items: center; justify-content: center;"><button mat-raised-button
+        color="primary" (click)="submitTest()">Submit</button></div>
+  </div>
+
+</div>

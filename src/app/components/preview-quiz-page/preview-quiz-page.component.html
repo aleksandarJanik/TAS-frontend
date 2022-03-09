@@ -12,10 +12,7 @@
         <mat-icon>settings</mat-icon>
         <span>Cofigure</span>
       </button>
-      <button mat-menu-item>
-        <mat-icon> publish</mat-icon>
-        <span>Publish</span>
-      </button>
+
       <button mat-menu-item>
         <mat-icon> table_chart</mat-icon>
         <span>Analyze</span>
@@ -26,8 +23,8 @@
 </div>
 <div class="container-fluid" style="background:  #f2f2f2;padding-bottom: 10rem;" *ngIf="exam">
   <div id="wrapper" style="width: 70%; margin: 0 auto; padding-top: 3rem; background: white; height: 100%;">
-    <div *ngFor="let question of exam.questions">
-      <app-show-question [question]="question"></app-show-question>
+    <div *ngFor="let question of exam.questions; let i = index">
+      <app-show-question [question]="question" [num]="i+1"></app-show-question>
 
     </div>
     <div style=" height: 4rem; display: flex; align-items: center; justify-content: center;"><button mat-raised-button color="primary" >Submit</button></div>

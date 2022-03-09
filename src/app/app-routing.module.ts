@@ -89,6 +89,20 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'quiz/:token',
+    loadChildren: () =>
+      import('./components/publish-quiz-page/publish-quiz.module').then(
+        (m) => m.PublishQuizModule
+      ),
+  },
+  {
+    path: 'quiz-result/:token',
+    loadChildren: () =>
+      import('./components/quiz-results-page/quiz-results.module').then(
+        (m) => m.QuizResultsModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',

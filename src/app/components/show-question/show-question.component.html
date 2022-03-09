@@ -1,29 +1,32 @@
 <div id="wapperQuestion" style="padding: 2rem;" *ngIf="question">
-  <h3>{{question.question}}</h3>
+  <h3><span *ngIf="num">{{num}}.</span>{{question.question}}<span (click)="clearAnswers()" *ngIf="question.type+'' !== typeQuestion.CHECKBOXES+''" style="float: right; cursor: pointer;" matTooltip="Clear"><mat-icon style="position: absolute;"> clear_all</mat-icon></span></h3>
   <div style="padding: 0.5rem;">
-    <mat-radio-group *ngIf="question.type+'' === typeQuestion.RADIO+''">
+    <mat-radio-group *ngIf="question.type+'' === typeQuestion.RADIO+''" [(ngModel)]="answer">
     <div *ngFor="let a of answers" style="margin-bottom: 0.5rem;">
-      <mat-radio-button [value]="a">{{a.name}}</mat-radio-button>
+      <mat-radio-button [value]="a.name" (click)="addResult(a.name)">{{a.name}}</mat-radio-button>
     </div>
     </mat-radio-group>
 
-    <section class="example-section" *ngIf="question.type+'' === typeQuestion.CHECKBOXES+''">
-      <div *ngFor="let a of answers" style="margin-bottom: 0.5rem;">
-        <mat-checkbox >{{a.name}}</mat-checkbox>
+    <section class="example-section" *ngIf="question.type+'' === typeQuestion.CHECKBOXES+''" >
+      <div *ngFor="let a of answers; let i = index" style="margin-bottom: 0.5rem;">
+        <mat-checkbox [checked]="checkboxes[a.name]===true" [(ngModel)]="checkboxes[a.name]" (change)="sendCheckBox(a.name)"  (click)="addResultCheckBox(a.name)">{{a.name}}</mat-checkbox>
+
       </div>
     </section>
 
-    <mat-form-field appearance="fill" *ngIf="question.type+'' === typeQuestion.DROPDOWN+''">
-      <mat-select>
-        <mat-option *ngFor="let a of answers" [value]="a.name">
+    <mat-form-field appearance="fill" *ngIf="question.type+'' === typeQuestion.DROPDOWN+''" >
+      <mat-select [(ngModel)]="answer">
+        <mat-option *ngFor="let a of answers" (click)="addResult(a.name)" [value]="a.name">
           {{a.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="fill" *ngIf="question.type+'' === typeQuestion.SHORT_ANSWER+''">
-        <input matInput placeholder="Your answer here" >
+        <input matInput placeholder="Your answer here" (focusout)="addResultText($event)" [(ngModel)]="answer">
       </mat-form-field>
   </div>
 </div>
 <hr>
+
+

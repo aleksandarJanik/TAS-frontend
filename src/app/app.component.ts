@@ -13,9 +13,10 @@ import { StorageService } from './services/storage.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  userFromDb: UserStateModel;
   private _mobileQueryListener: () => void;
   href: any;
-  hideItems: boolean = false;
+  // hideItems: boolean = true;
   isMenuOpened: boolean | undefined;
   title = 'tcg-bulk-admin';
   mobileQuery: MediaQueryList;
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private router: Router,
+    // private router: Router,
     private route: ActivatedRoute
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -45,14 +46,19 @@ export class AppComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.userSub = this.user$.subscribe(async (user) => {
       console.log('AppComponent', user);
+      this.userFromDb = user;
     });
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        console.log('url in app:', e.url);
-        this.hideItems =
-          e.url === '/login' || e.url === '/register' ? true : false;
-      }
-    });
+    // this.router.events.subscribe((e) => {
+    //   if (e instanceof NavigationEnd) {
+    //     console.log('url in app:', e.url);
+    //     this.hideItems =
+    //       e.url === '/login' ||
+    //       e.url === '/register' ||
+    //       e.url.includes('/quiz/')
+    //         ? true
+    //         : false;
+    //   }
+    // });
   }
   async ngOnDestroy() {
     try {

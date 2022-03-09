@@ -84,3 +84,11 @@ export class QuestionCreateDto {
 
   isRequired = true;
 }
+export class ChoosenQuestion {
+  answers: string[];
+  questionId: string;
+}
+export class FinishedExamDto {
+  questions: ChoosenQuestion[];
+  studentSpecialTokenId: string;
+}

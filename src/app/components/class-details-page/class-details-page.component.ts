@@ -17,6 +17,7 @@ import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 import { SelectTestModalComponent } from '../select-test-modal/select-test-modal.component';
 import { ExamService } from 'src/app/services/exam.service';
 import { Exam } from 'src/app/models/exam.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-class-details-page',
@@ -48,7 +49,8 @@ export class ClassDetailsPageComponent implements OnInit {
     private classService: ClassService,
     public dialog: MatDialog,
     router: Router,
-    private examService: ExamService
+    private examService: ExamService,
+    private _snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -200,7 +202,17 @@ export class ClassDetailsPageComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.data === 'confirmed') {
-        this.getStudents();
+        this._snackBar.open('You have successfully sent the test!', 'close', {
+          duration: 2500,
+        });
+      } else if (result && result.data === 'error') {
+        this._snackBar.open(
+          'The test has already been sent for this students!',
+          'close',
+          {
+            duration: 2500,
+          }
+        );
       }
     });
   }
