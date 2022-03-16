@@ -89,6 +89,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'analyze/:id',
+    loadChildren: () =>
+      import('./components/analyze-quiz-page/analyze-quiz.module').then(
+        (m) => m.AnalyzeQuizModule
+      ),
+  },
+  {
     path: 'quiz/:token',
     loadChildren: () =>
       import('./components/publish-quiz-page/publish-quiz.module').then(
@@ -102,6 +109,7 @@ const routes: Routes = [
         (m) => m.QuizResultsModule
       ),
   },
+
   {
     path: '**',
     redirectTo: 'login',

@@ -63,7 +63,7 @@ export class SearchComponent implements OnInit {
     });
     this.searchThings.push(...filteredExams);
     this.searchThings.push(...filteredClasses);
-    console.log(this.searchThings);
+    // console.log(this.searchThings);
   }
 
   @HostListener('click', ['$event'])
@@ -91,7 +91,7 @@ export class SearchComponent implements OnInit {
     }
   }
   onSelectionChange(event: any) {
-    console.log('onSelectionChange called', event.option.value._id);
+    // console.log('onSelectionChange called', event.option.value._id);
     this.searchValue = '';
     this.filteredSearchThings = [];
     let clicked = this.searchThings.find(

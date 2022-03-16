@@ -1,0 +1,120 @@
+<div class="card-header">
+  <div style="position: absolute;" *ngIf="exam">
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="outline: 1px dotted;">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/test/{{exam._id}}">
+        <mat-icon>create</mat-icon>
+        <span>Create</span>
+      </button>
+      <button mat-menu-item (click)="goToPreview()" *ngIf="exam">
+        <mat-icon>remove_red_eye</mat-icon>
+        <span>Preview</span>
+      </button>
+
+      <button mat-menu-item routerLink="/configure/{{exam._id}}" *ngIf="exam">
+        <mat-icon>settings</mat-icon>
+        <span>Cofigure</span>
+      </button>
+    </mat-menu>
+  </div>
+  <h1 class="m-0 text-center fw-bold"> <span style="margin-right: 3rem;" *ngIf="exam">Analyze
+      <b>{{exam.name}}</b></span></h1>
+</div>
+
+<div class="container-fluid" style="background:  #f2f2f2; padding-bottom: 10rem; height: 100%;" *ngIf="exam">
+  <div id="wrapper" style="width: 100%; height: 100%; margin: 0 auto; padding-top: 3rem;  ">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+        <mat-tab [label]="className" *ngFor="let className of classesNames">
+
+          <mat-card class="employee-table-wrapper">
+            <mat-card-title class="employee-table-wrapper__header">
+              <!-- <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Student List</p>
+              <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+                <div class="employee-table-wrapper__icon-wrapper">
+                  <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+                </div>
+                <input matInput class="employee-table-wrapper__search-input" (keyup)="applyFilter($event)">
+                <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                  <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
+                </button>
+              </div>
+              <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+              </button> -->
+
+            </mat-card-title>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInCsv(className)" color="primary">Export</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInPdf(className)"
+              color="primary">PDF</button>
+            <mat-card-content class="employee-table__content">
+              <table class="employee-table__table" style="width: 100%;" *ngIf="classesNameResult[className]" mat-table [dataSource]="classesNameResult[className]">
+
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="student">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Student </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.student.firstName}}
+                    {{element.student.lastName}} </td>
+                </ng-container>
+
+                <!-- Company Column -->
+                <ng-container matColumnDef="email">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Email </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.student.email}} </td>
+                </ng-container>
+
+                <!-- City Column -->
+                <ng-container matColumnDef="date_submitted">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Date submitted </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+                    <div class="threeDots">
+                      {{element.createdAt | date}}
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- grade Column -->
+                <ng-container matColumnDef="grade">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Grade </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+                    <div class="threeDots">
+                      {{element.grade}}
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- Score Column -->
+                <ng-container matColumnDef="score">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Score </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+                    <div class="threeDots">
+                      {{element.numCorrectAnswers}} / {{element.exam.questions.length}} ({{element.gradePercentage.toFixed(0)}}%)
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- State Column -->
+                <ng-container matColumnDef="set">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Settings</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+                    <button mat-button (click)="viewResult(element)">View</button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" >
+                </tr>
+              </table>
+            </mat-card-content>
+
+          </mat-card>
+
+        </mat-tab>
+
+
+      </mat-tab-group>
+  </div>
+</div>

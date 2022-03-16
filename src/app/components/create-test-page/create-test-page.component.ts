@@ -81,4 +81,22 @@ export class CreateTestPageComponent implements OnInit {
       });
     }
   }
+
+  async goToAnalyze(exam: Exam) {
+    let hasResults = await this.examService.checkIfExamHasResults(exam._id);
+    if (hasResults) {
+      this._router.navigate([`/analyze/${exam._id}`]);
+    } else {
+      Swal.fire({
+        icon: 'info', //"success" | "error" | "warning" | "info" | "question"
+        title: 'No submissions found!',
+        text: 'You need one submission at least to preview the results!',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+        backdrop: false,
+        // timer: 1000,
+        // footer: '',
+      });
+    }
+  }
 }

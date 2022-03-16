@@ -37,7 +37,8 @@ export class PublishQuizPageComponent implements OnInit {
     private route: ActivatedRoute,
     private examService: ExamService,
     private _router: Router, // private storageService: StorageService
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private storageService: StorageService
   ) {}
 
   async ngOnInit() {
@@ -158,7 +159,8 @@ export class PublishQuizPageComponent implements OnInit {
     };
     console.log('finishedExamDto: ', finishedExamDto);
     try {
-      await this.examService.finishExam(finishedExamDto);
+      let resutls = await this.examService.finishExam(finishedExamDto);
+      this.storageService.addResultsFromTest(resutls);
       if (this.exam.showResutPage) {
         this._router.navigate([`/quiz-result/${this.token._id}`]);
       } else {

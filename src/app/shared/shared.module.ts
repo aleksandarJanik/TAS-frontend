@@ -49,6 +49,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ShowQuestionComponent } from '../components/show-question/show-question.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ResultsSpecificQuestionInModalComponent } from '../components/results-specific-question-in-modal/results-specific-question-in-modal.component';
 
 @NgModule({
   declarations: [AddClassComponent, AddStudentComponent, ShowQuestionComponent],
@@ -110,6 +111,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     AddClassComponent,
     AddStudentComponent,
+
     A11yModule,
     CdkAccordionModule,
     ClipboardModule,

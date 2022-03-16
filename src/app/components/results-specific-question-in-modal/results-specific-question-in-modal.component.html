@@ -1,0 +1,41 @@
+<div *ngIf="result">
+<div style="width: 100%; border-bottom: 1px solid #e5e5e5;">
+  <h1>Review answers</h1>
+</div>
+<div *ngFor="let question of result.exam.questions; let i = index" style=" border-bottom: 1px solid #e5e5e5;">
+
+  <div id="wapperQuestion" style="" >
+    <h3 style="display: inline-block;  margin-right: 10%;"><span >{{i+1}}.</span>{{question.question}}</h3>
+    <mat-icon style="position: relative;top: 6px; font-size: 2rem; color: #73c873;" *ngIf="result.questionsFromStudent[i].isCorrect">check</mat-icon>
+    <mat-icon style="position: relative; top: 6px; font-size: 2rem; color: #ef5f5f;;" *ngIf="!result.questionsFromStudent[i].isCorrect">close</mat-icon>
+    <div style="padding: 0.5rem;">
+      <mat-radio-group *ngIf="question.type+'' === typeQuestion.RADIO+''"  disabled="true" >
+        <div *ngFor="let a of question.answers; let i = index" style="margin-bottom: 0.5rem;">
+          <mat-radio-button [value]="a" [checked]="result.questionsFromStudent[i].answers[0] === a">{{a}}</mat-radio-button>
+        </div>
+      </mat-radio-group>
+
+
+      <section class="example-section" *ngIf="question.type+'' === typeQuestion.CHECKBOXES+''">
+        <div *ngFor="let a of question.answers;" style="margin-bottom: 0.5rem;">
+          <mat-checkbox [checked]="result.questionsFromStudent[i].answers.includes(a)" [disabled]="true" >{{a}}</mat-checkbox>
+
+        </div>
+      </section>
+
+      <mat-form-field appearance="fill" *ngIf="question.type+'' === typeQuestion.DROPDOWN+''">
+        <mat-select [(ngModel)]="result.questionsFromStudent[i].answers[0]" [disabled]="true">
+          <mat-option *ngFor="let a of question.answers" [value]="a" >
+            {{a}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill"
+        *ngIf="question.type+'' === typeQuestion.SHORT_ANSWER+''">
+        <input matInput placeholder="Your answer here" [value]="result.questionsFromStudent[i].answers[0]" disabled="true" >
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+</div>

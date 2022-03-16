@@ -13,7 +13,7 @@
       <button mat-stroked-button color="primary" (click)="goToPreview(exam)" ><mat-icon>remove_red_eye</mat-icon><span>Preview</span></button>
       <button mat-stroked-button color="primary"  routerLink="/configure/{{exam._id}}"><mat-icon>settings</mat-icon> <span>Cofigure</span></button>
 
-      <button mat-stroked-button color="primary"><mat-icon> table_chart</mat-icon> <span>Analyze</span></button>
+      <button mat-stroked-button color="primary" (click)="goToAnalyze(exam)" ><mat-icon> table_chart</mat-icon> <span>Analyze</span></button>
       <button mat-button color="warn" (click)="deleteQuiz(exam._id)"><mat-icon>delete_outline</mat-icon>Delete</button>
     </div>
   </div>

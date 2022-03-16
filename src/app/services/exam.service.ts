@@ -10,6 +10,7 @@ import {
   QuestionViewDto,
   UpdateSettingsExamDto,
 } from '../models/exam.model';
+import { Result } from '../models/result.model';
 import {
   SaveTimeDto,
   StudentSpecialToken,
@@ -163,11 +164,37 @@ export class ExamService {
 
   async finishExam(finishedExamDto: FinishedExamDto) {
     let tokenFromDb = await lastValueFrom(
-      this.http.post<SaveTimeDto>(
+      this.http.post<Result>(
         `${AppConstants.API_URL}/student-special-token/finished-exam`,
         finishedExamDto
       )
     );
     return tokenFromDb;
+  }
+
+  async getFinishedResults(examId: string) {
+    let results: Result[] = await lastValueFrom(
+      this.http.get<Result[]>(`${AppConstants.API_URL}/result/exam/${examId}`)
+    );
+    return results;
+  }
+
+  async checkIfExamHasResults(examId: string) {
+    let result: boolean = await lastValueFrom(
+      this.http.post<boolean>(
+        `${AppConstants.API_URL}/result/check-exam/${examId}`,
+        {}
+      )
+    );
+    return result;
+  }
+
+  async getNamesOfClasses(examId: string) {
+    let results: string[] = await lastValueFrom(
+      this.http.get<string[]>(
+        `${AppConstants.API_URL}/result/class-names/${examId}`
+      )
+    );
+    return results;
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChoosenQuestion } from '../models/exam.model';
+import { Result } from '../models/result.model';
 
 const JWT_TOKEN_KEY = 'JWT-KEY';
 const REFRESH_TOKEN_KEY = 'REFRESH-KEY';
@@ -74,5 +75,17 @@ export class StorageService {
     let newelem: any = JSON.parse(elem);
 
     return newelem;
+  }
+
+  addResultsFromTest(results: Result) {
+    return localStorage.setItem('RESULT_FROM_TEST', JSON.stringify(results));
+  }
+  getResultsFromTest() {
+    let elem = localStorage.getItem('RESULT_FROM_TEST') as string;
+    let newelem: any = JSON.parse(elem);
+    return newelem;
+  }
+  removeResultsFromTest() {
+    localStorage.removeItem('RESULT_FROM_TEST');
   }
 }
