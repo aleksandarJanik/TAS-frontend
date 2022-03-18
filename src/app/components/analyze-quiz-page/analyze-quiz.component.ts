@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
@@ -7,6 +7,9 @@ import { Result } from 'src/app/models/result.model';
 import { ExamService } from 'src/app/services/exam.service';
 import Swal from 'sweetalert2';
 import { ResultsSpecificQuestionInModalComponent } from '../results-specific-question-in-modal/results-specific-question-in-modal.component';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-analyze-quiz',
@@ -26,6 +29,7 @@ export class AnalyzeQuizComponent implements OnInit {
     'score',
     'set',
   ];
+  // public manageHeader: any = {};
   constructor(
     private examService: ExamService,
     private route: ActivatedRoute,
@@ -42,7 +46,11 @@ export class AnalyzeQuizComponent implements OnInit {
     this.exam = await this.examService.getExamById(results[0].exam._id);
     for (let c of this.classesNames) {
       let resultsFiltered = results.filter((r) => r.class.name === c);
-      this.classesNameResult[c] = resultsFiltered;
+      let dataSource: MatTableDataSource<Result> =
+        new MatTableDataSource<Result>(resultsFiltered);
+      this.classesNameResult[c] = dataSource;
+
+      // this.manageHeader[c] = false;
     }
     console.log('results: ', results);
     console.log('classesNames: ', this.classesNameResult);
@@ -63,6 +71,17 @@ export class AnalyzeQuizComponent implements OnInit {
       });
     }
   }
+
+  // public applyFilter(event: Event, className: string): void {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   console.log(this.classesNameResult[className]);
+  //   console.log(filterValue);
+  //   this.classesNameResult[className].filter = filterValue.trim().toLowerCase();
+  // }
+
+  // public showFilterInput(className: string): void {
+  //   this.manageHeader[className] = !this.manageHeader[className];
+  // }
 
   viewResult(result: Result) {
     let dialogRef = this.dialog.open(ResultsSpecificQuestionInModalComponent, {
@@ -127,5 +146,21 @@ export class AnalyzeQuizComponent implements OnInit {
       options
     );
   }
-  exportInPdf(className: string) {}
+  exportInPdf(className: string) {
+    let DATA: any = document.getElementById(`htmlData_${className}`);
+    let date = new Date();
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save(
+        `Class_${
+          this.classesNameResult[className][0].className
+        }_results_${date.toLocaleDateString('en-US')}.pdf`
+      );
+    });
+  }
 }

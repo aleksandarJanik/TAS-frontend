@@ -30,26 +30,28 @@
 
           <mat-card class="employee-table-wrapper">
             <mat-card-title class="employee-table-wrapper__header">
-              <!-- <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Student List</p>
-              <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+              <p  class="employee-table-wrapper__title">{{className}}</p>
+              <!-- <div *ngIf="manageHeader[className]" class="employee-table-wrapper__search">
                 <div class="employee-table-wrapper__icon-wrapper">
                   <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
                 </div>
-                <input matInput class="employee-table-wrapper__search-input" (keyup)="applyFilter($event)">
-                <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                <input matInput class="employee-table-wrapper__search-input" (keyup)="applyFilter($event, className)">
+                <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput(className)">
                   <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
                 </button>
               </div>
-              <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+              <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput(className)">
                 <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
               </button> -->
 
             </mat-card-title>
+            <div style="float: right;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInCsv(className)" color="primary">Export</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInPdf(className)"
-              color="primary">PDF</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInPdf(className)" color="primary">PDF</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+
             <mat-card-content class="employee-table__content">
-              <table class="employee-table__table" style="width: 100%;" *ngIf="classesNameResult[className]" mat-table [dataSource]="classesNameResult[className]">
+              <table class="employee-table__table" style="width: 100%;"  [id]="'htmlData_'+className" *ngIf="classesNameResult[className]" mat-table [dataSource]="classesNameResult[className]">
 
 
 

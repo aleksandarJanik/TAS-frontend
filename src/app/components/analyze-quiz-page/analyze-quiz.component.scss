@@ -1,0 +1,68 @@
+.employee-table-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 16px 16px 32px 16px;
+  // box-shadow: 0 3px 11px 0 $shadow-white, 0 3px 3px -2px $shadow-grey,
+  //   0 1px 8px 0 $shadow-dark-grey;
+
+  &__header {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // @media (max-width: $small) {
+    //   padding: 0 16px;
+    // }
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon-wrapper {
+    height: 46px;
+    width: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    color: inherit;
+  }
+
+  &__search-input {
+    font-size: 14px;
+    height: 32px;
+    border: 0;
+    border-bottom: 1px solid gray;
+    outline: none;
+
+    // @media (max-width: $small) {
+    //   width: 150px;
+    // }
+
+    &:focus {
+      border-bottom: 2px solid blue;
+    }
+  }
+
+  &__button {
+    box-shadow: none;
+    background-color: inherit;
+    width: 46px;
+    height: 46px;
+    color: gray;
+
+    &:hover {
+      // background-color: $black-08;
+      // color: $blue;
+    }
+  }
+}

@@ -68,3 +68,30 @@
   </mat-card-content>
 
 </mat-card>
+
+<!-- <app-manage-active-tests [tokens]="student.tokens" *ngIf="student && student.tokens" style="margin-bottom: 10rem;"></app-manage-active-tests> -->
+
+
+<mat-card class="server-chart" style="width: 30%; margin: 0 auto" *ngIf="student && student.tokens" >
+  <mat-card-title class="server-chart__header">
+    <h1>In progress exams:</h1>
+
+
+  </mat-card-title>
+
+  <mat-card-content class="server-chart__content">
+    <div class="server-chart__content-item" *ngFor="let token of student.tokens; let i = index"
+      style="border-bottom: 1px solid #D9D9D9; color: rgb(162, 77, 77);">
+      <h3 class="server-chart__content-item-text" style="margin-top: 1rem; margin-bottom: 1rem;">
+        <b>{{token.exam.name}}</b>
+        <mat-icon style="float: right; margin-right: 1rem; cursor: pointer;" (click)="removeCurrentExam(token._id)">
+          delete</mat-icon>
+      </h3>
+
+    </div>
+  </mat-card-content>
+
+</mat-card>
+<div style="height: 10rem;" *ngIf="student && student.tokens">
+
+</div>

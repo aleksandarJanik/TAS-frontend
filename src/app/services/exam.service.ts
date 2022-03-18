@@ -172,6 +172,15 @@ export class ExamService {
     return tokenFromDb;
   }
 
+  async removeCurrentExam(token: string) {
+    let tokenFromDb = await lastValueFrom(
+      this.http.delete<StudentSpecialToken>(
+        `${AppConstants.API_URL}/student-special-token/${token}`
+      )
+    );
+    return tokenFromDb;
+  }
+
   async getFinishedResults(examId: string) {
     let results: Result[] = await lastValueFrom(
       this.http.get<Result[]>(`${AppConstants.API_URL}/result/exam/${examId}`)

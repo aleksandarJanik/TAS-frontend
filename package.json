@@ -29,6 +29,7 @@
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^5.1.3",
     "chart.js": "^3.7.0",
+    "jspdf": "^2.5.1",
     "ng2-charts": "^3.0.8",
     "ngx-countdown": "^13.0.0",
     "rxjs": "~7.4.0",

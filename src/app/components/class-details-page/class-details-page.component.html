@@ -29,6 +29,7 @@
   </mat-card-title>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button (click)="exportInCsv()" color="primary">Export</button>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button *ngIf="showSendExamBtn" (click)="openModalToSendQuiz()"  color="accent" matTooltip="The test will be sent to all present students in the class">Evaluate them</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button *ngIf="showSendExamBtn" (click)="openModalToSendQuiz()" class="btn btn-success" matTooltip="You are going to start lecturing with all present students in the class">Start lecturing</button>
   <mat-card-content class="employee-table__content">
     <table class="employee-table__table" *ngIf="dataSource" mat-table [dataSource]="dataSource">
 
@@ -36,7 +37,6 @@
       <ng-container matColumnDef="select">
         <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>
          Present
-
         </th>
         <td class="employee-table__table-checkbox" mat-cell *matCellDef="let row">
 
@@ -66,6 +66,27 @@
           </div>
         </td>
       </ng-container>
+
+
+      <ng-container matColumnDef="in_progress">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> In progress </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+          <div class="threeDots">
+            <span *ngFor="let token of element.tokens">
+              {{token.exam.name}},
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="done">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Done </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element">
+          <div class="threeDots">
+
+          </div>
+        </td>
+      </ng-container> -->
 
       <!-- State Column -->
       <ng-container matColumnDef="set">

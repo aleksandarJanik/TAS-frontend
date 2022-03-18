@@ -44,10 +44,23 @@ export class AddClassComponent implements OnInit {
       this.classForm.markAsDirty();
       this.classForm.markAllAsTouched();
     } else {
-      let response = await this.classService.createClasses(
-        this.classForm.value
-      );
-      this.classCreated.emit();
+      try {
+        let response = await this.classService.createClasses(
+          this.classForm.value
+        );
+        this.classCreated.emit();
+      } catch (e: any) {
+        Swal.fire({
+          icon: 'error', //"success" | "error" | "warning" | "info" | "question"
+          title: 'Name already exist!',
+          text: e.error.error,
+          showCancelButton: false,
+          confirmButtonText: 'Ok',
+          backdrop: false,
+          // timer: 1000,
+          // footer: '',
+        });
+      }
     }
   }
   collapsingAddClass() {

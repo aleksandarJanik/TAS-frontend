@@ -1,6 +1,7 @@
-<div *ngIf="result">
+<div *ngIf="result" [id]="'htmlData1'">
 <div style="width: 100%; border-bottom: 1px solid #e5e5e5;">
-  <h1>Review answers</h1>
+  <h1>Review answers for {{result.student.firstName}} {{result.student.lastName}} <button mat-raised-button style="float: right;" (click)="exportInPdf()" color="primary">PDF</button></h1>
+
 </div>
 <div *ngFor="let question of result.exam.questions; let i = index" style=" border-bottom: 1px solid #e5e5e5;">
 

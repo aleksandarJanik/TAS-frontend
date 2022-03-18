@@ -34,6 +34,7 @@ export class ClassDetailsPageComponent implements OnInit {
     'student',
     'email',
     'activities',
+    'in_progress',
     'set',
   ];
   public dataSource: MatTableDataSource<Student>;
@@ -54,10 +55,10 @@ export class ClassDetailsPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // console.log(this.students);
     this.classId = this.route.snapshot.paramMap.get('id');
     this.classFromDb = await this.classService.getClassById(this.classId);
     await this.getStudents();
+    console.log('students: ', this.students);
     this.exams = await this.examService.getExams();
     this.exams = this.exams.filter((e) => e.questions.length > 0);
     if (this.exams.length > 0) {
@@ -73,6 +74,9 @@ export class ClassDetailsPageComponent implements OnInit {
 
   public showFilterInput(): void {
     this.isShowFilterInput = !this.isShowFilterInput;
+    if (!this.isShowFilterInput) {
+      this.dataSource.filter = '';
+    }
   }
 
   onEvent(event: any) {

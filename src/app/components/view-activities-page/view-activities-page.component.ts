@@ -4,9 +4,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Activity } from 'src/app/models/activity.model';
 import { Class } from 'src/app/models/class.model';
+import { StudentSpecialToken } from 'src/app/models/specialTokenStudent.model';
 import { Student } from 'src/app/models/student.model';
 import { ActivityService } from 'src/app/services/activity.service';
 import { ClassService } from 'src/app/services/class.service';
+import { ExamService } from 'src/app/services/exam.service';
 import { StudentService } from 'src/app/services/student.service';
 import Swal from 'sweetalert2';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
@@ -34,7 +36,8 @@ export class ViewActivitiesPageComponent implements OnInit {
     private route: ActivatedRoute,
     private classService: ClassService,
     private activityService: ActivityService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private examService: ExamService
   ) {}
 
   async ngOnInit() {
@@ -43,6 +46,7 @@ export class ViewActivitiesPageComponent implements OnInit {
     this.studentId = this.route.snapshot.paramMap.get('studentId');
     this.student = await this.studentService.getStudentById(this.studentId);
     this.dataSource = new MatTableDataSource<Activity>(this.student.activities);
+    console.log(this.student);
   }
 
   public applyFilter(event: Event): void {
@@ -52,6 +56,9 @@ export class ViewActivitiesPageComponent implements OnInit {
 
   public showFilterInput(): void {
     this.isShowFilterInput = !this.isShowFilterInput;
+    if (!this.isShowFilterInput) {
+      this.dataSource.filter = '';
+    }
   }
 
   async revmoveActivity(activityId: string) {
@@ -103,5 +110,14 @@ export class ViewActivitiesPageComponent implements OnInit {
         );
       }
     });
+  }
+  async removeCurrentExam(tokenId: string) {
+    try {
+      await this.examService.removeCurrentExam(tokenId);
+      this.student = await this.studentService.getStudentById(this.studentId);
+      this.dataSource = new MatTableDataSource<Activity>(
+        this.student.activities
+      );
+    } catch (e) {}
   }
 }
