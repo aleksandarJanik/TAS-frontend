@@ -3,3 +3,7 @@ export class FilteredSearchThings {
   _id: string;
   isClass: boolean;
 }
+
+export class ItemNumber {
+  number: number;
+}

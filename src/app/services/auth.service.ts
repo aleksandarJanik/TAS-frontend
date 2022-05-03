@@ -20,6 +20,7 @@ import { UserState } from '../ngxs-store/user/user.state';
 import { lastValueFrom, Observable, Subscription } from 'rxjs';
 import { AppConstants } from '../shared/constants';
 import Swal from 'sweetalert2';
+import { Socket } from 'ngx-socket-io';
 
 const helper = new JwtHelperService();
 
@@ -37,7 +38,8 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
     private store: Store,
-    private _router: Router
+    private _router: Router,
+    private socket: Socket
   ) {
     this.loadStoredTokens();
     this.user$.subscribe((data) => (this.user = data));
@@ -65,6 +67,7 @@ export class AuthService {
   async getUserFromApiAndUpdateState() {
     let userCheckLogin: any;
     let user: UserStateModel;
+    let refreshToken = await this.storageService.getRefreshToken();
     try {
       userCheckLogin = await this.checkLogin();
 
@@ -90,6 +93,21 @@ export class AuthService {
       };
       await this.storageService.removeAccessToken();
       await this.storageService.removeRefreshToken();
+    }
+
+    if (user.loaded && user.loggedIn) {
+      console.log('Login socket!!!!');
+      // this.socket.connect();
+      if (this.socket.ioSocket.connected === false) {
+        console.log(
+          'getUserFromApiAndUpdateState socket disconnected! Connecting again!'
+        );
+        this.socket.connect();
+      }
+      this.socket.emit('login', { refreshToken, userId: user._id });
+    } else if (user.loaded && !user.loggedIn) {
+      this.socket.disconnect();
+      this.socket.connect();
     }
 
     await lastValueFrom(this.store.dispatch(new AddUser(user)));
@@ -187,6 +205,7 @@ export class AuthService {
     let response = await lastValueFrom(
       this.http.post<User>(`${AppConstants.API_URL}/logout`, refreshTokenDto)
     );
+    await this.getUserFromApiAndUpdateState();
   }
 
   async register(userDto: RegisterCustomerDto) {

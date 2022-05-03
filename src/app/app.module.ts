@@ -22,6 +22,12 @@ import { EditActivityComponent } from './components/edit-activity/edit-activity.
 import { CreateNoteModalComponent } from './components/create-note-modal/create-note-modal.component';
 import { CreateTestModalComponent } from './components/create-test-modal/create-test-modal.component';
 import { SelectTestModalComponent } from './components/select-test-modal/select-test-modal.component';
+import { AppConstants } from './shared/constants';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: AppConstants.API_URL,
+  options: {},
+};
 
 @NgModule({
   declarations: [
@@ -47,6 +53,7 @@ import { SelectTestModalComponent } from './components/select-test-modal/select-
     NgxsModule.forRoot([UserState], {}),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     BrowserAnimationsModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     {

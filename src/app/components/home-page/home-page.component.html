@@ -6,8 +6,8 @@
 <app-notes></app-notes>
 <br>
 <br>
-<div class="container-fluid" style="margin-bottom: 4rem;">
-  <h2 style="text-align: center;">Classes average grades</h2>
+<div class="container-fluid" style="margin-bottom: 4rem;" *ngIf="classes">
+  <h2 style="text-align: center;" *ngIf="classes.length">Classes average grades</h2>
   <div class="row">
     <div class="col-4" *ngFor="let c of classes">
       <app-chart [data]="c"></app-chart>
