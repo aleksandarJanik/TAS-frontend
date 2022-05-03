@@ -48,3 +48,8 @@
 button:focus {
   outline: 1px dotted !important;
 }
+
+::ng-deep .mat-menu-content {
+  max-height: 15rem !important;
+  width: 17.5rem !important;
+}

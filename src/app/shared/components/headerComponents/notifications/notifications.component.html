@@ -1,17 +1,14 @@
-<button class="notification-button" mat-mini-fab [matMenuTriggerFor]="bell">
+<button class="notification-button" mat-mini-fab [matMenuTriggerFor]="bell" (click)="showNotifications()">
   <mat-icon matBadge="4" matBadgeColor="warn" class="notification-button__icon">notifications_none</mat-icon>
 </button>
-<mat-menu #bell="matMenu" xPosition="before" class="notification-menu">
-  <button mat-menu-item class="notification-menu__button">
-    <mat-icon class="notification-menu__icon_yellow">local_offer</mat-icon>Check out this awesome ticket
+<mat-menu #bell="matMenu" xPosition="before" class="notification-menu" >
+
+  <button mat-menu-item class="notification-menu__button" routerLink="/analyze/{{notification.quiz}}" *ngFor="let notification of notifications" matTooltip="{{notification.message}}">
+
+    <mat-icon class="notification-menu__icon_pink" *ngIf="!notification.isNew">notifications_none</mat-icon>
+    <mat-icon class="notification-menu__icon_pink"  *ngIf="notification.isNew">notifications_active</mat-icon>
+    {{notification.message}}
   </button>
-  <button mat-menu-item class="notification-menu__button">
-    <mat-icon class="notification-menu__icon_green">thumb_up</mat-icon>What is the best way to get ...
-  </button>
-  <button mat-menu-item class="notification-menu__button">
-    <mat-icon class="notification-menu__icon_pink">notifications_none</mat-icon>This is just a simple notification
-  </button>
-  <button mat-menu-item class="notification-menu__button">
-    <mat-icon class="notification-menu__icon_blue">local_grocery_store</mat-icon>12 new orders has arrived today
-  </button>
+
+
 </mat-menu>

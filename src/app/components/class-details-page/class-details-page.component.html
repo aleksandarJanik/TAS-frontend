@@ -61,7 +61,7 @@
       <ng-container matColumnDef="activities">
         <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Activities </th>
         <td class="employee-table__table-body" mat-cell *matCellDef="let element">
-          <div class="threeDots">
+          <div class="threeDots" style="width: 300px;">
            <span *ngFor="let a of element.activities"><span *ngIf="a.name !== 'activity'">{{a.name}}</span> {{a.grade}}, &nbsp;</span>
           </div>
         </td>
@@ -71,7 +71,7 @@
       <ng-container matColumnDef="in_progress">
         <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> In progress </th>
         <td class="employee-table__table-body" mat-cell *matCellDef="let element">
-          <div class="threeDots">
+          <div class="threeDots" style="width: 150px;">
             <span *ngFor="let token of element.tokens">
               {{token.exam.name}},
             </span>

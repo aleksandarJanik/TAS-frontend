@@ -48,7 +48,7 @@ export class AnalyzeQuizComponent implements OnInit {
       let resultsFiltered = results.filter((r) => r.class.name === c);
       let dataSource: MatTableDataSource<Result> =
         new MatTableDataSource<Result>(resultsFiltered);
-      this.classesNameResult[c] = dataSource;
+      this.classesNameResult[c] = resultsFiltered;
 
       // this.manageHeader[c] = false;
     }
